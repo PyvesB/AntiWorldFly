@@ -19,10 +19,10 @@ public class HelpCommand {
 
 	public void getHelp(CommandSender sender) {
 
-		sender.sendMessage((new StringBuilder()).append(ChatColor.BLUE).append("-=-=-=-=-=-=-=-=-=-")
+		sender.sendMessage((new StringBuilder()).append(ChatColor.BLUE).append("-=-=-=-=-=-=-=-=-")
 				.append(ChatColor.GRAY).append("[").append(ChatColor.BLUE).append("\u06DE").append("§lAntiWorldFly")
 				.append(ChatColor.BLUE).append("\u06DE").append(ChatColor.GRAY).append("]").append(ChatColor.BLUE)
-				.append("-=-=-=-=-=-=-=-=-=-").toString());
+				.append("-=-=-=-=-=-=-=-=-").toString());
 
 		sendJsonClickableMessage(sender,
 				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf disable")
@@ -68,7 +68,7 @@ public class HelpCommand {
 						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_INFO).toString(), "/awf info");
 
 		sender.sendMessage((new StringBuilder()).append(ChatColor.BLUE)
-				.append("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-").toString());
+				.append("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-").toString());
 	}
 
 	/**
