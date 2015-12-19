@@ -1,0 +1,26 @@
+name: AntiWorldFly
+main: com.hm.antiworldfly.AntiWorldFly
+version: 2.0
+author: DarkPyves
+load: POSTWORLD
+description: A plugin to disable flying and chosen commands when joining or playing in specific worlds.
+website: https://github.com/PyvesB/AntiWorldFly
+commands:
+  awf:
+    description: Main AntiWorldFly command, use it to list sub-commands. 
+    aliases: [antiworldfly]  
+    usage: /<command>
+permissions:
+  antiworldfly.use:
+    description: Allows to parameter plugin with in-game commands.
+    default: false
+  antiworldfly.fly:
+    description: Allows to fly even if blocked by the plugin.
+    default: false  
+  antiworldfly.*:
+    description: Star notation of permissions, includes all of them.
+    default: op
+    children:
+      antiworldfly.use: true
+      antiworldfly.fly: true
+

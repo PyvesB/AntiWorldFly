@@ -1,0 +1,22 @@
+#================= AntiWorldFly 2.0 configuration =================#
+#==================================================================#
+
+# Worlds in which flying is blocked; list below with - in front of each world name.
+antiFlyWorlds: 
+  - your_world_1
+  - your_world_2
+  
+# Additional blocked commands; list below with - in front of each world name.
+otherBlockedCommands: []
+#  - /yourCommand_1
+#  - /yourCommand_2
+  
+# Enable or disable "Flying is disabled in this world." chat messages when joining a world.
+chatMessage: true
+
+# Enable or disable "Flying is disabled in this world." title screen messages when joining a world.
+titleMessage: true
+
+# Enable (true) or disable (false) AntiWorlFly when in creative mode.
+antiFlyCreative: true
+  

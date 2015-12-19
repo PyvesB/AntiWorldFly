@@ -1,0 +1,35 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |                AntiWorldFly language file              | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+configuration-successfully-reloaded: "Configuration successfully reloaded."
+configuration-reload-failed: "Errors while reloading configuration. Please view logs for more details."
+no-permissions: "You do not have the permission to do this."
+words-blocked: "Worlds in which flying is blocked:"
+awf-disabled: "AntiWorldFly disabled till next reload or /awf enable."
+awf-enabled: "AntiWorldFly enabled."
+world-added: "New world successfully added: "
+world-removed: "World successfully removed: "
+misused-command: "Misused command. Please type /awf."
+fly-disabled-chat: "Flying is disabled in this world."
+fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-subtitle: "Flying is disabled in this world."
+command-disabled-chat: "Command is disabled in this world."
+
+awf-command-disable: "Disable plugin till next reload."
+awf-command-enable: "Enable plugin (if previously disabled)."
+awf-command-list: "List worlds in which flying is blocked."
+awf-command-add: "Add WORLD to blocked worlds."
+awf-command-reload: "Reload the plugin's configuration."
+awf-command-info: "Display various information about the plugin."
+awf-command-remove: "Remove WORLD from blocked worlds."    
+
+version-command-name: "Name:"
+version-command-version: "Version:"
+version-command-website: "Website:"
+version-command-author: "Author:"
+version-command-description: "Description:"
+version-command-description-details: "A plugin to disable flying and chosen commands when joining or playing in specific worlds."
+version-command-enabled: "Plugin enabled:"
