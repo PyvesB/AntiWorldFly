@@ -11,10 +11,10 @@ otherBlockedCommands: []
 #  - /yourCommand_1
 #  - /yourCommand_2
   
-# Enable or disable "Flying is disabled in this world." chat messages when joining a world.
+# Enable or disable chat messages when joining a world.
 chatMessage: true
 
-# Enable or disable "Flying is disabled in this world." title screen messages when joining a world.
+# Enable or disable title screen messages when joining a world.
 titleMessage: true
 
 # Enable (true) or disable (false) AntiWorlFly when in creative mode.

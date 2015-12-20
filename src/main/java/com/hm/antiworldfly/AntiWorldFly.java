@@ -185,9 +185,9 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 					loadLang();
 					this.reloadConfig();
 					extractParametersFromConfig();
-					sender.sendMessage(chatHeader + ChatColor.WHITE + Lang.CONFIGURATION_SUCCESSFULLY_RELOADED);
+					sender.sendMessage(chatHeader + Lang.CONFIGURATION_SUCCESSFULLY_RELOADED);
 				} catch (Exception ex) {
-					sender.sendMessage(chatHeader + ChatColor.WHITE + Lang.CONFIGURATION_RELOAD_FAILED);
+					sender.sendMessage(chatHeader + Lang.CONFIGURATION_RELOAD_FAILED);
 					ex.printStackTrace();
 				}
 			} else
