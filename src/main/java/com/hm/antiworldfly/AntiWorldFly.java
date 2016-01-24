@@ -24,11 +24,16 @@ import com.hm.antiworldfly.listener.AntiWorldFlyWorldJoin;
 import com.hm.antiworldfly.metrics.MetricsLite;
 
 /**
- * A plugin to disable flying when joining or playing in specific worlds.
+ * A plugin to disable flying and chosen commands when joining or playing in specific worlds.
  * AntiWorldFly is under GNU General Public License version 3.
  * 
+ * Official plugin's server: hellominecraft.fr
+ * 
+ * Bukkit project page: dev.bukkit.org/bukkit-plugins/anti-world-fly
+ * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
+ * 
  * @since March 2015.
- * @version 2.0
+ * @version 2.0.1
  * @author DarkPyves
  */
 
@@ -64,6 +69,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	/**
 	 * Called when server is launched or reloaded.
 	 */
+	@Override
 	public void onEnable() {
 
 		loadLang();
@@ -151,6 +157,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	/**
 	 * Called when server is stopped or reloaded.
 	 */
+	@Override
 	public void onDisable() {
 
 		this.getLogger().info("AntiWorldFly has been disabled.");
@@ -159,6 +166,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	/**
 	 * Called when a player or the console enters a command.
 	 */
+	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]) {
 
 		if (!cmd.getName().equalsIgnoreCase("awf"))
