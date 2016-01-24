@@ -5,7 +5,7 @@
 	<artifactId>AntiWorldFly</artifactId>
 	<version>2.0.1</version>
 	<url>https://github.com/PyvesB/AntiWorldFly</url>
-	<name>AdvancedAchievements</name>
+	<name>AntiWorldFly</name>
 	<description>A Minecraft plugin to disable flying and chosen commands when joining or playing in specific worlds.</description>
 	<issueManagement>
 		<system>GitHub Issues</system>

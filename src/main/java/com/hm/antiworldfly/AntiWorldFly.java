@@ -25,7 +25,11 @@ import com.hm.antiworldfly.metrics.MetricsLite;
 
 /**
  * A plugin to disable flying and chosen commands when joining or playing in specific worlds.
+ * 
  * AntiWorldFly is under GNU General Public License version 3.
+ * 
+ * Please visit the plugin's GitHub for more information :
+ * https://github.com/PyvesB/AntiWorldFly
  * 
  * Official plugin's server: hellominecraft.fr
  * 
