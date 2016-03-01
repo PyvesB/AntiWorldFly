@@ -37,7 +37,7 @@ import com.hm.antiworldfly.metrics.MetricsLite;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.0.1
+ * @version 2.0.2
  * @author DarkPyves
  */
 

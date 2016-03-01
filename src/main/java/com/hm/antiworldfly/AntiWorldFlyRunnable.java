@@ -35,7 +35,7 @@ public class AntiWorldFlyRunnable implements Runnable {
 
 		if (plugin.isTitleMessage()) {
 			try {
-				PacketSender.sendTitlePacket(player, "{text:\"" + Lang.FLY_DISABLED_TITLE + "\"}", "{text:\""
+				PacketSender.sendTitlePacket(player, "{\"text\":\"" + Lang.FLY_DISABLED_TITLE + "\"}", "{\"text\":\""
 						+ Lang.FLY_DISABLED_SUBTITLE + "\"}");
 			} catch (Exception ex) {
 
