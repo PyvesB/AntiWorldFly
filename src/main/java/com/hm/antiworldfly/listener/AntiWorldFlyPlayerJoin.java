@@ -1,6 +1,5 @@
 package com.hm.antiworldfly.listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -25,10 +24,9 @@ public class AntiWorldFlyPlayerJoin implements Listener {
 
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 				// Schedule runnable to disable flying.
-				Bukkit.getServer()
+				plugin.getServer()
 						.getScheduler()
-						.scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("AntiWorldFly"),
-								new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
+						.scheduleSyncDelayedTask(plugin, new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
 
 				break;
 			}
