@@ -10,6 +10,11 @@ import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.antiworldfly.AntiWorldFlyRunnable;
 import com.hm.antiworldfly.utils.UpdateChecker;
 
+/**
+ * Class to disable flying when a player joins the server.
+ * 
+ * @author Pyves
+ */
 public class AntiWorldFlyPlayerJoin implements Listener {
 
 	private AntiWorldFly plugin;

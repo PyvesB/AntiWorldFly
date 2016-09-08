@@ -10,6 +10,11 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.antiworldfly.AntiWorldFlyRunnable;
 
+/**
+ * Class to disable flying when a player changes worlds.
+ * 
+ * @author Pyves
+ */
 public class AntiWorldFlyWorldJoin implements Listener {
 
 	private AntiWorldFly plugin;

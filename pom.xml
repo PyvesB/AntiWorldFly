@@ -11,6 +11,9 @@
 		<system>GitHub Issues</system>
 		<url>https://github.com/PyvesB/AntiWorldFly/issues</url>
 	</issueManagement>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<build>
 		<plugins>

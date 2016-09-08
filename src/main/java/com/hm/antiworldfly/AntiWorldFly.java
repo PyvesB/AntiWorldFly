@@ -19,6 +19,7 @@ import com.hm.antiworldfly.command.HelpCommand;
 import com.hm.antiworldfly.command.InfoCommand;
 import com.hm.antiworldfly.listener.AntiWorldFlyPlayerJoin;
 import com.hm.antiworldfly.listener.AntiWorldFlyPreProcess;
+import com.hm.antiworldfly.listener.AntiWorldFlyToggleFly;
 import com.hm.antiworldfly.listener.AntiWorldFlyWorldJoin;
 import com.hm.antiworldfly.utils.FileManager;
 import com.hm.antiworldfly.utils.UpdateChecker;
@@ -70,6 +71,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private HelpCommand helpCommand;
 	private InfoCommand infoCommand;
 	private List<String> otherBlockedCommands;
+	private AntiWorldFlyToggleFly awfPlayerToggleFly;
 
 	/**
 	 * Constructor.
@@ -95,12 +97,14 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		awfPreProcess = new AntiWorldFlyPreProcess(this);
 		awfWorldJoin = new AntiWorldFlyWorldJoin(this);
 		awfPlayerJoin = new AntiWorldFlyPlayerJoin(this);
+		awfPlayerToggleFly = new AntiWorldFlyToggleFly(this);
 
 		PluginManager pm = getServer().getPluginManager();
 
 		pm.registerEvents(awfPreProcess, this);
 		pm.registerEvents(awfWorldJoin, this);
 		pm.registerEvents(awfPlayerJoin, this);
+		pm.registerEvents(awfPlayerToggleFly, this);
 
 		extractParametersFromConfig(true);
 
