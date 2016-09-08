@@ -1,0 +1,59 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |        Anti World Fly 2.1 French language file         | #
+# |                      By DarkPyves                      | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: Vous n'avez pas la permission de faire cela.
+
+# Related to /awf reload.
+configuration-successfully-reloaded: Configuration rechargée avec succès.
+configuration-reload-failed: Erreur(s) lors du rechargement des configurations. Merci de consulter les logs détaillés pour plus d'informations.
+
+# Related to other plugin commands.
+words-blocked: 'Mondes dans lesquels il est interdit de voler :'
+awf-disabled: AntiWorldFly désactivé jusqu'au prochain redémarrage ou /awf enable.
+awf-enabled: AntiWorldFly activé.
+world-added: 'Nouveau monde ajouté avec succès : '
+world-removed: 'Monde retiré avec succès : '
+misused-command: Mauvaise commande. Tapez /awf.
+command-error: Erreur lors de l'éxecution de la commande.
+
+# Related to informational messages.
+fly-disabled-chat: Il est interdit de voler dans ce monde.
+fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-subtitle: Il est interdit de voler dans ce monde.
+command-disabled-chat: Commande interdite dans ce monde.
+
+# Related to /awf help.
+awf-command-disable: Désactiver AWF jusqu'au prochain &7redémarrage.
+awf-command-enable: Activer AWF (si précédemment désactivé).
+awf-command-list: Lister les mondes avec AWF.
+awf-command-add: Ajouter WORLD aux mondes bloqués.
+awf-command-reload: Recharger la configuration du plugin.
+awf-command-info: Afficher des informations à propos du plugin.
+awf-command-remove: Retirer WORLD des mondes bloqués.
+awf-command-disable-hover: Plugin désactivé jusqu'au prochain redémarrage ou /awf enable.
+awf-command-enable-hover: Plugin activé par défaut. A utiliser si /awf disable a été employé !
+awf-command-list-hover: Voler et certaines commandes sont interdites dans ces mondes.
+awf-command-add-hover: Assurez-vous d'avoir spécifié le bon nom !
+awf-command-reload-hover: Recharger la plupart des paramètres dans config.yml et lang.yml.
+awf-command-info-hover: Des infos supplémentaires sur le plugin !
+awf-command-remove-hover: Réactiver le vol et les commandes dans ce monde.
+awf-tip: '&lASTUCE&r &7&n&oCliquez&r &8ou &7&n&opassez votre curseur&r &8sur les commandes !'
+
+# Related to /awf info.
+version-command-name: 'Nom :'
+version-command-version: 'Version :'
+version-command-website: 'Site :'
+version-command-author: 'Auteur :'
+version-command-description: 'Description :'
+version-command-description-details: Désactive le vol et certaines commandes dans des mondes spécifiques !
+version-command-enabled: 'Plugin activé: '
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
