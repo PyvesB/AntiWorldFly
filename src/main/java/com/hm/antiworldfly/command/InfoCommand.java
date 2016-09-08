@@ -3,9 +3,13 @@ package com.hm.antiworldfly.command;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import com.hm.antiworldfly.language.Lang;
 import com.hm.antiworldfly.AntiWorldFly;
 
+/**
+ * Class in charge of displaying the plugin's extra information (/awf info).
+ * 
+ * @author Pyves
+ */
 public class InfoCommand {
 
 	private AntiWorldFly plugin;
@@ -20,21 +24,21 @@ public class InfoCommand {
 	 */
 	public void getInfo(CommandSender sender) {
 
-		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_NAME + " " + ChatColor.WHITE
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-name", "Name:") + " " + ChatColor.WHITE
 				+ plugin.getDescription().getName());
-		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_VERSION + " "
-				+ ChatColor.WHITE + plugin.getDescription().getVersion());
-		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_WEBSITE + " "
-				+ ChatColor.WHITE + plugin.getDescription().getWebsite());
-		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_AUTHOR + " " + ChatColor.WHITE
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-version", "Version:") + " " + ChatColor.WHITE
+				+ plugin.getDescription().getVersion());
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-website", "Website:") + " " + ChatColor.WHITE
+				+ plugin.getDescription().getWebsite());
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-author", "Author:") + " " + ChatColor.WHITE
 				+ plugin.getDescription().getAuthors().get(0));
-		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_DESCRIPTION + " "
-				+ ChatColor.WHITE + Lang.VERSION_COMMAND_DESCRIPTION_DETAILS);
-		if (plugin.isDisabled())
-			sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_ENABLED + " "
-					+ ChatColor.WHITE + "NO");
-		else
-			sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE + Lang.VERSION_COMMAND_ENABLED + " "
-					+ ChatColor.WHITE + "YES");
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-description", "Description:") + " "
+				+ ChatColor.WHITE + plugin.getPluginLang().getString("version-command-description-details",
+						"A plugin to disable flying and chosen commands when joining or playing in specific worlds."));
 	}
 }

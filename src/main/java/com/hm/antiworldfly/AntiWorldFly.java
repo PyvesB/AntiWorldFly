@@ -1,43 +1,44 @@
 package com.hm.antiworldfly;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
 
 import com.hm.antiworldfly.command.HelpCommand;
 import com.hm.antiworldfly.command.InfoCommand;
-import com.hm.antiworldfly.language.Lang;
 import com.hm.antiworldfly.listener.AntiWorldFlyPlayerJoin;
 import com.hm.antiworldfly.listener.AntiWorldFlyPreProcess;
 import com.hm.antiworldfly.listener.AntiWorldFlyWorldJoin;
-import com.hm.antiworldfly.metrics.MetricsLite;
+import com.hm.antiworldfly.utils.FileManager;
+import com.hm.antiworldfly.utils.UpdateChecker;
+import com.hm.antiworldfly.utils.YamlManager;
 
 /**
  * A plugin to disable flying and chosen commands when joining or playing in specific worlds.
  * 
  * AntiWorldFly is under GNU General Public License version 3.
  * 
- * Please visit the plugin's GitHub for more information :
- * https://github.com/PyvesB/AntiWorldFly
+ * Please visit the plugin's GitHub for more information : https://github.com/PyvesB/AntiWorldFly
  * 
  * Official plugin's server: hellominecraft.fr
  * 
  * Bukkit project page: dev.bukkit.org/bukkit-plugins/anti-world-fly
+ * 
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.0.2
+ * @version 2.1
  * @author DarkPyves
  */
 
@@ -50,11 +51,20 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private boolean antiFlyCreative;
 	private String chatHeader;
 	private boolean titleMessage;
+	private boolean successfulLoad;
+
+	// Fields related to file handling.
+	private YamlManager config;
+	private YamlManager lang;
+	private FileManager fileManager;
 
 	// Plugin listeners.
 	private AntiWorldFlyPreProcess awfPreProcess;
 	private AntiWorldFlyWorldJoin awfWorldJoin;
 	private AntiWorldFlyPlayerJoin awfPlayerJoin;
+
+	// Used to check for plugin updates.
+	private UpdateChecker updateChecker;
 
 	// Additional classes related to plugin commands.
 	private HelpCommand helpCommand;
@@ -68,6 +78,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		disabled = false;
 		antiFlyWorlds = new ArrayList<String>();
+		fileManager = new FileManager(this);
 	}
 
 	/**
@@ -76,15 +87,10 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 
-		loadLang();
-		this.saveDefaultConfig();
+		// Start enabling plugin.
+		long startTime = System.currentTimeMillis();
 
-		try {
-			MetricsLite metrics = new MetricsLite(this);
-			metrics.start();
-		} catch (IOException e) {
-			this.getLogger().severe("Error while sending Metrics statistics.");
-		}
+		this.getLogger().info("Registering listeners...");
 
 		awfPreProcess = new AntiWorldFlyPreProcess(this);
 		awfWorldJoin = new AntiWorldFlyWorldJoin(this);
@@ -96,65 +102,207 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		pm.registerEvents(awfWorldJoin, this);
 		pm.registerEvents(awfPlayerJoin, this);
 
-		extractParametersFromConfig();
+		extractParametersFromConfig(true);
+
+		// Check for available plugin update.
+		if (config.getBoolean("checkForUpdate", true))
+			updateChecker = new UpdateChecker(this);
+
+		try {
+			MetricsLite metrics = new MetricsLite(this);
+			metrics.start();
+		} catch (IOException e) {
+			this.getLogger().severe("Error while sending Metrics statistics.");
+			successfulLoad = false;
+		}
 
 		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + "\u06DE" + ChatColor.GRAY + "] " + ChatColor.WHITE;
 
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
 
-		this.getLogger().info("AntiWorldFly v" + this.getDescription().getVersion() + " has been enabled.");
-
+		if (successfulLoad)
+			this.getLogger().info("Plugin successfully enabled and ready to run! Took "
+					+ (System.currentTimeMillis() - startTime) + "ms.");
+		else
+			this.getLogger().severe("Error(s) while loading plugin. Please view previous logs for more information.");
 	}
 
 	/**
 	 * Extract plugin parameters from the configuration file.
+	 * 
+	 * @param attemptUpdate
 	 */
-	private void extractParametersFromConfig() {
+	private void extractParametersFromConfig(boolean attemptUpdate) {
+
+		successfulLoad = true;
+		Logger logger = this.getLogger();
+
+		logger.info("Backing up and loading configuration files...");
+
+		try {
+			config = fileManager.getNewConfig("config.yml");
+		} catch (IOException e) {
+			logger.severe("Error while loading configuration file.");
+			e.printStackTrace();
+			successfulLoad = false;
+		} catch (InvalidConfigurationException e) {
+			logger.severe("Error while loading configuration file, disabling plugin.");
+			logger.severe("Verify your syntax using the following logs and by visiting yaml-online-parser.appspot.com");
+			e.printStackTrace();
+			successfulLoad = false;
+			this.getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
+
+		try {
+			lang = fileManager.getNewConfig(config.getString("languageFileName", "lang.yml"));
+		} catch (IOException e) {
+			logger.severe("Error while loading language file.");
+			e.printStackTrace();
+			successfulLoad = false;
+		} catch (InvalidConfigurationException e) {
+			logger.severe("Error while loading language file, disabling plugin.");
+			logger.severe("Verify your syntax using the following logs and by visiting yaml-online-parser.appspot.com");
+			e.printStackTrace();
+			successfulLoad = false;
+			this.getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
+
+		try {
+			fileManager.backupFile("config.yml");
+		} catch (IOException e) {
+			logger.severe("Error while backing up configuration file.");
+			e.printStackTrace();
+			successfulLoad = false;
+		}
+
+		try {
+			fileManager.backupFile(config.getString("languageFileName", "lang.yml"));
+		} catch (IOException e) {
+			logger.severe("Error while backing up language file.");
+			e.printStackTrace();
+			successfulLoad = false;
+		}
+
+		// Update configurations from previous versions of the plugin if server reloads or restarts.
+		if (attemptUpdate) {
+			updateOldConfiguration();
+			updateOldLanguage();
+		}
 
 		antiFlyWorlds = this.getConfig().getStringList("antiFlyWorlds");
 		chatMessage = this.getConfig().getBoolean("chatMessage", true);
 		titleMessage = this.getConfig().getBoolean("titleMessage", true);
 		antiFlyCreative = this.getConfig().getBoolean("antiFlyCreative", true);
 		otherBlockedCommands = this.getConfig().getStringList("otherBlockedCommands");
+
+		// Set to null in case user changed the option and did a /awf reload. Do not recheck for update on /awf
+		// reload.
+		if (!config.getBoolean("checkForUpdate", true)) {
+			updateChecker = null;
+		}
 	}
 
 	/**
-	 * Load the lang.yml file.
+	 * Update configuration file from older plugin versions by adding missing parameters. Upgrades from versions prior
+	 * to 2.1 are not supported.
 	 */
-	public void loadLang() {
+	private void updateOldConfiguration() {
 
-		File lang = new File(getDataFolder(), "lang.yml");
-		if (!lang.exists()) {
+		boolean updateDone = false;
+
+		// Added in version 2.1:
+		if (!config.getKeys(false).contains("languageFileName")) {
+			config.set("languageFileName", "lang.yml", "Name of the language file.");
+			updateDone = true;
+		}
+
+		if (!config.getKeys(false).contains("checkForUpdate")) {
+			config.set("checkForUpdate", true,
+					"Check for update on plugin launch and notify when an OP joins the game.");
+			updateDone = true;
+		}
+
+		if (updateDone) {
+			// Changes in the configuration: save and do a fresh load.
 			try {
-				getDataFolder().mkdir();
-				lang.createNewFile();
-				Reader defConfigStream = new InputStreamReader(this.getResource("lang.yml"), "UTF8");
-				if (defConfigStream != null) {
-					YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-					defConfig.save(lang);
-					Lang.setFile(defConfig);
-					return;
-				}
+				config.saveConfig();
+				config.reloadConfig();
 			} catch (IOException e) {
-
-				this.getLogger().severe("Error while creating language file.");
+				this.getLogger().severe("Error while saving changes to the configuration file.");
 				e.printStackTrace();
+				successfulLoad = false;
 			}
 		}
-		YamlConfiguration conf = YamlConfiguration.loadConfiguration(lang);
-		for (Lang item : Lang.values()) {
-			if (conf.getString(item.getPath()) == null) {
-				conf.set(item.getPath(), item.getDefault());
-			}
-		}
-		Lang.setFile(conf);
-		try {
-			conf.save(lang);
-		} catch (IOException e) {
+	}
 
-			this.getLogger().severe("Error while saving language file.");
-			e.printStackTrace();
+	/**
+	 * Update language file from older plugin versions by adding missing parameters. Upgrades from versions prior to 2.1
+	 * are not supported.
+	 */
+	private void updateOldLanguage() {
+
+		boolean updateDone = false;
+
+		// Added in version 2.1:
+		if (!lang.getKeys(false).contains("awf-command-add-hover")) {
+			lang.set("awf-command-add-hover", "Make sure you specify the correct name!");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-remove-hover")) {
+			lang.set("awf-command-remove-hover", "World must be listed in /awf list.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-list-hover")) {
+			lang.set("awf-command-list-hover", "Flying and some specific commands are disabled in these worlds.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-disable-hover")) {
+			lang.set("awf-command-disable-hover", "The plugin will not work until next reload or /awf enable.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-enable-hover")) {
+			lang.set("awf-command-enable-hover",
+					"Plugin enabled by default. Use this if you entered /awf disable before!");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-reload-hover")) {
+			lang.set("awf-command-reload-hover", "Reload most settings in config.yml and lang.yml files.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-info-hover")) {
+			lang.set("awf-command-info-hover", "Some extra info about the plugin and its awesome author!");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-tip")) {
+			lang.set("awf-tip", "&lHINT&r &7You can &f&n&ohover&r &7or &f&n&oclick&r &7on the commands!");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("command-error")) {
+			lang.set("command-error", "An error occurred while executing the command.");
+			updateDone = true;
+		}
+
+		if (updateDone) {
+			// Changes in the language file: save and do a fresh load.
+			try {
+				lang.saveConfig();
+				lang.reloadConfig();
+			} catch (IOException e) {
+				this.getLogger().severe("Error while saving changes to the language file.");
+				e.printStackTrace();
+				successfulLoad = false;
+			}
 		}
 	}
 
@@ -182,7 +330,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		} else if (args[0].equalsIgnoreCase("list")) {
 
-			sender.sendMessage(chatHeader + Lang.WORLDS_BLOCKED);
+			sender.sendMessage(chatHeader + lang.getString("words-blocked", "Worlds in which flying is blocked:"));
 			for (String world : antiFlyWorlds)
 				sender.sendMessage(" - " + world);
 
@@ -190,42 +338,49 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 			infoCommand.getInfo(sender);
 
-		} else if (args[0].equalsIgnoreCase("reload")) {
-			if (sender.hasPermission("antiworldfly.use")) {
-				try {
-
-					loadLang();
-					this.reloadConfig();
-					extractParametersFromConfig();
-					sender.sendMessage(chatHeader + Lang.CONFIGURATION_SUCCESSFULLY_RELOADED);
-				} catch (Exception ex) {
-					sender.sendMessage(chatHeader + Lang.CONFIGURATION_RELOAD_FAILED);
-					ex.printStackTrace();
-				}
-			} else
-				sender.sendMessage(chatHeader + Lang.NO_PERMS);
-		}
-
-		else if (sender.hasPermission("antiworldfly.use")) {
+		} else if (sender.hasPermission("antiworldfly.use")) {
 
 			String action = args[0].toLowerCase();
 
 			if (action.equals("disable")) {
 
+				this.reloadConfig();
+				extractParametersFromConfig(false);
+
+				if (successfulLoad) {
+
+					if (sender instanceof Player)
+						sender.sendMessage(chatHeader + lang.getString("configuration-successfully-reloaded",
+								"Configuration successfully reloaded."));
+					this.getLogger().info("Configuration successfully reloaded.");
+				}
+			} else if (action.equals("disable")) {
+
 				disabled = true;
-				sender.sendMessage(chatHeader + Lang.AWF_DISABLED);
+				sender.sendMessage(chatHeader
+						+ lang.getString("awf-disabled", "AntiWorldFly disabled till next reload or /awf enable."));
 
 			} else if (action.equals("enable")) {
 
 				disabled = false;
-				sender.sendMessage(chatHeader + Lang.AWF_ENABLED);
+				sender.sendMessage(chatHeader + lang.getString("awf-enabled", "AntiWorldFly enabled."));
 
 			} else if (action.equals("add") && args.length == 2) {
 
 				antiFlyWorlds.add(args[1]);
-				this.getConfig().set("antiFlyWorlds", antiFlyWorlds);
-				this.saveConfig();
-				sender.sendMessage(chatHeader + Lang.WORLD_ADDED + args[1]);
+				config.set("antiFlyWorlds", antiFlyWorlds);
+				try {
+					config.saveConfig();
+					config.reloadConfig();
+				} catch (IOException e) {
+					this.getLogger().severe("Error while adding world.");
+					sender.sendMessage(chatHeader
+							+ lang.getString("command-error", "An error occurred while executing the command."));
+					e.printStackTrace();
+					return true;
+				}
+				sender.sendMessage(
+						chatHeader + lang.getString("world-added", "New world successfully added: ") + args[1]);
 
 			} else if (action.equals("remove") && args.length == 2) {
 
@@ -233,22 +388,32 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 					if (antiFlyWorlds.get(i).equals(args[1]))
 						antiFlyWorlds.remove(i);
 				}
-				this.getConfig().set("antiFlyWorlds", antiFlyWorlds);
-				this.saveConfig();
-				sender.sendMessage(chatHeader + Lang.WORLD_REMOVED + args[1]);
+				config.set("antiFlyWorlds", antiFlyWorlds);
+				try {
+					config.saveConfig();
+					config.reloadConfig();
+				} catch (IOException e) {
+					this.getLogger().severe("Error while removing world.");
+					sender.sendMessage(chatHeader
+							+ lang.getString("command-error", "An error occurred while executing the command."));
+					e.printStackTrace();
+					return true;
+				}
+				sender.sendMessage(
+						chatHeader + lang.getString("world-removed", "World successfully removed: ") + args[1]);
 
 			} else
-				sender.sendMessage(chatHeader + Lang.MISUSED_COMMAND);
+				sender.sendMessage(
+						chatHeader + lang.getString("misused-command", "Misused command. Please type /awf."));
 
 		} else
-			sender.sendMessage(chatHeader + Lang.NO_PERMS);
+			sender.sendMessage(
+					chatHeader + lang.getString("no-permissions", "You do not have the permission to do this."));
 
 		return true;
 	}
 
-	/**
-	 * Various getters and setters.
-	 */
+	// Various getters and setters. Names are self-explanatory.
 
 	public boolean isDisabled() {
 
@@ -280,9 +445,23 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		return chatHeader;
 	}
 
+	public YamlManager getPluginLang() {
+
+		return lang;
+	}
+
+	public UpdateChecker getUpdateChecker() {
+
+		return updateChecker;
+	}
+
 	public List<String> getOtherBlockedCommands() {
 
 		return otherBlockedCommands;
 	}
 
+	public void setSuccessfulLoad(boolean successfulLoad) {
+
+		this.successfulLoad = successfulLoad;
+	}
 }

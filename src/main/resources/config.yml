@@ -1,12 +1,23 @@
-#================= AntiWorldFly 2.0 configuration =================#
-#==================================================================#
+#==============================O==============================#
+# I---------------------------------------------------------I #
+# |        Anti World Fly 2.1 configuration - Readme        | #
+# 1---------------------------------------------------------1 #
+#==============================o==============================#
+
+# Visit the GitHub for some additional documentation: github.com/PyvesB/AntiWorldFly
+
+#=============================O=O=============================#
+# II-------------------------------------------------------II #
+# |                    General  settings                    | #
+# 2---------------------------------------------------------2 #
+#=============================o=o=============================#
 
 # Worlds in which flying is blocked; list below with - in front of each world name.
 antiFlyWorlds: 
   - your_world_1
   - your_world_2
   
-# Additional blocked commands; list below with - in front of each world name.
+# Additional blocked commands in the above worlds; list below with - in front of each command.
 otherBlockedCommands: []
 #  - /yourCommand_1
 #  - /yourCommand_2
@@ -19,4 +30,15 @@ titleMessage: true
 
 # Enable (true) or disable (false) AntiWorlFly when in creative mode.
 antiFlyCreative: true
-  
+
+# Name of the language file.
+languageFileName: lang.yml
+
+# Check for update on plugin launch and notify when an OP joins the game.
+checkForUpdate: true
+
+#=============================OOO=============================#
+# III-----------------------------------------------------III #
+# |         Parameters to appear in future versions         | #
+# 3---------------------------------------------------------3 #
+#=============================ooo=============================#

@@ -9,8 +9,12 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.antiworldfly.AntiWorldFlyRunnable;
-import com.hm.antiworldfly.language.Lang;
 
+/**
+ * Class to block some commands specified by the user in the config.
+ * 
+ * @author Pyves
+ */
 public class AntiWorldFlyPreProcess implements Listener {
 
 	private AntiWorldFly plugin;
@@ -42,10 +46,9 @@ public class AntiWorldFlyPreProcess implements Listener {
 			for (String world : plugin.getAntiFlyWorlds()) {
 				if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 					// Schedule runnable to disable flying.
-					Bukkit.getServer()
-							.getScheduler()
-							.scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("AntiWorldFly"),
-									new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
+					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(
+							Bukkit.getPluginManager().getPlugin("AntiWorldFly"),
+							new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
 
 					break;
 
@@ -67,6 +70,8 @@ public class AntiWorldFlyPreProcess implements Listener {
 
 	/**
 	 * Block a command and cancel corresponding event.
+	 * 
+	 * @param event
 	 */
 	private void blockCommand(PlayerCommandPreprocessEvent event) {
 
@@ -75,7 +80,8 @@ public class AntiWorldFlyPreProcess implements Listener {
 
 		for (String world : plugin.getAntiFlyWorlds()) {
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
-				event.getPlayer().sendMessage(plugin.getChatHeader() + Lang.COMMAND_DISABLED_CHAT);
+				event.getPlayer().sendMessage(plugin.getChatHeader() + plugin.getPluginLang()
+						.getString("command-disabled-chat", "Command is disabled in this world."));
 				event.setCancelled(true);
 				break;
 

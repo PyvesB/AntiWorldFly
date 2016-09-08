@@ -4,10 +4,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.hm.antiworldfly.language.Lang;
 import com.hm.antiworldfly.particle.PacketSender;
 import com.hm.antiworldfly.AntiWorldFly;
 
+/**
+ * Class in charge of displaying the plugin's help (/awf help).
+ * 
+ * @author Pyves
+ */
 public class HelpCommand {
 
 	private AntiWorldFly plugin;
@@ -19,79 +23,97 @@ public class HelpCommand {
 
 	public void getHelp(CommandSender sender) {
 
-		sender.sendMessage((new StringBuilder()).append(ChatColor.BLUE).append("-=-=-=-=-=-=-=-=-")
-				.append(ChatColor.GRAY).append("[").append(ChatColor.BLUE).append("\u06DE").append("§lAntiWorldFly")
-				.append(ChatColor.BLUE).append("\u06DE").append(ChatColor.GRAY).append("]").append(ChatColor.BLUE)
-				.append("-=-=-=-=-=-=-=-=-").toString());
+		// Header.
+		sender.sendMessage(ChatColor.BLUE + "------------------ " + ChatColor.WHITE + ChatColor.BLUE + "\u265E"
+				+ ChatColor.translateAlternateColorCodes('&', " &9AntiWorldFly ") + ChatColor.BLUE + "\u265E"
+				+ ChatColor.WHITE + ChatColor.BLUE + " ------------------");
 
-		sendJsonClickableMessage(sender,
-				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf disable")
-						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_DISABLE).toString(), "/awf disable");
+		sendJsonClickableHoverableMessage(sender,
+				plugin.getChatHeader() + ChatColor.BLUE + "/awf list" + ChatColor.WHITE + " > "
+						+ plugin.getPluginLang().getString("awf-command-list", "List worlds in which AWF operates."),
+				"/awf list", plugin.getPluginLang().getString("awf-command-list-hover",
+						"Flying and some specific commands are disabled in these worlds."));
 
-		sendJsonClickableMessage(sender,
-				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf enable")
-						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_ENABLE).toString(), "/awf enable");
+		sendJsonClickableHoverableMessage(sender,
+				plugin.getChatHeader() + ChatColor.BLUE + "/awf info" + ChatColor.WHITE + " > "
+						+ plugin.getPluginLang().getString("awf-command-info",
+								"Display various information about the plugin."),
+				"/awf info", plugin.getPluginLang().getString("awf-command-info-hover",
+						"Some extra info about the plugin and its awesome author!"));
 
-		sendJsonClickableMessage(
-				sender,
-				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf list")
-						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_LIST).toString(), "/awf list");
+		if (sender.hasPermission("antiworldfly.use"))
+			sendJsonClickableHoverableMessage(sender,
+					plugin.getChatHeader() + ChatColor.BLUE + "/awf reload" + ChatColor.WHITE + " > "
+							+ plugin.getPluginLang().getString("awf-command-reload",
+									"Reload the plugin's configuration."),
+					"/awf reload", plugin.getPluginLang().getString("awf-command-reload-hover",
+							"Reload most settings in config.yml and lang.yml files."));
 
-		sendJsonClickableMessage(
-				sender,
-				(new StringBuilder())
-						.append(plugin.getChatHeader())
-						.append(ChatColor.DARK_AQUA + "/awf add §oworld§r")
-						.append(ChatColor.WHITE)
-						.append(" - "
-								+ ChatColor.translateAlternateColorCodes('&',
-										Lang.AWF_COMMAND_ADD.toString().replace("WORLD", "§oworld§r"))).toString(),
-				"/awf add world");
+		if (sender.hasPermission("antiworldfly.use"))
+			sendJsonClickableHoverableMessage(sender,
+					plugin.getChatHeader() + ChatColor.BLUE + "/awf enable" + ChatColor.WHITE + " > "
+							+ plugin.getPluginLang().getString("awf-command-enable", "Enable plugin."),
+					"/awf enable", plugin.getPluginLang().getString("awf-command-enable-hover",
+							"Plugin enabled by default. Use this if you entered /awf disable before!"));
 
-		sendJsonClickableMessage(
-				sender,
-				(new StringBuilder())
-						.append(plugin.getChatHeader())
-						.append(ChatColor.DARK_AQUA + "/awf remove §oworld§r")
-						.append(ChatColor.WHITE)
-						.append(" - "
-								+ ChatColor.translateAlternateColorCodes('&', Lang.AWF_COMMAND_REMOVE.toString()
-										.replace("WORLD", "§oworld§r"))).toString(), "/awf remove world");
+		if (sender.hasPermission("antiworldfly.use"))
+			sendJsonClickableHoverableMessage(sender,
+					plugin.getChatHeader() + ChatColor.BLUE + "/awf disable" + ChatColor.WHITE + " > "
+							+ plugin.getPluginLang().getString("awf-command-disable", "Disable plugin."),
+					"/awf disable", plugin.getPluginLang().getString("awf-command-disable-hover",
+							"The plugin will not work until next reload or /awf enable."));
 
-		sendJsonClickableMessage(sender,
-				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf reload")
-						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_RELOAD).toString(), "/awf reload");
+		if (sender.hasPermission("antiworldfly.use"))
+			sendJsonClickableHoverableMessage(sender,
+					plugin.getChatHeader() + ChatColor.BLUE + "/awf add &oworld&r" + ChatColor.WHITE + " > "
+							+ plugin.getPluginLang().getString("awf-command-add", "Add WORLD to blocked worlds.")
+									.replace("WORLD", "&oworld&r"),
+					"/awf add world", plugin.getPluginLang().getString("awf-command-add-hover",
+							"Make sure you specify the correct name!"));
 
-		sendJsonClickableMessage(
-				sender,
-				(new StringBuilder()).append(plugin.getChatHeader()).append(ChatColor.DARK_AQUA + "/awf info")
-						.append(ChatColor.WHITE).append(" - " + Lang.AWF_COMMAND_INFO).toString(), "/awf info");
+		if (sender.hasPermission("antiworldfly.use"))
+			sendJsonClickableHoverableMessage(sender, plugin.getChatHeader() + ChatColor.BLUE + "/awf remove &oworld&r"
+					+ ChatColor.WHITE + " > "
+					+ plugin.getPluginLang().getString("awf-command-remove", "Remove WORLD from blocked worlds.")
+							.replace("WORLD", "&oworld&r"),
+					"/awf remove world",
+					plugin.getPluginLang().getString("awf-command-remove-hover", "World must be listed in /awf list."));
 
-		sender.sendMessage((new StringBuilder()).append(ChatColor.BLUE)
-				.append("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-").toString());
+		// Empty line.
+		sender.sendMessage(ChatColor.BLUE + " ");
+
+		// Tip message.
+		sender.sendMessage(ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', plugin.getPluginLang()
+				.getString("awf-tip", "&lHINT&r &8You can &7&n&ohover&r &8or &7&n&oclick&r &8on the commands!")));
 	}
 
 	/**
-	 * Send a packet message to the server in order to display a clickable
-	 * message. A suggestion command is then displayed in the chat. Parts of
-	 * this method were extracted from ELCHILEN0's AutoMessage plugin, under MIT
-	 * license (http://dev.bukkit.org/bukkit-plugins/automessage/). Thanks for
-	 * his help on this matter.
+	 * Send a packet message to the server in order to display a clickable and hoverable message. A suggested command is
+	 * displayed in the chat when clicked on, and an additional help message appears when a command is hovered.
+	 * 
+	 * @param sender
+	 * @param message
+	 * @param command
+	 * @param hover
 	 */
-	public void sendJsonClickableMessage(CommandSender sender, String message, String command) {
+	public void sendJsonClickableHoverableMessage(CommandSender sender, String message, String command, String hover) {
 
 		// Build the json format string.
-		String json = "{\"text\":\"" + message + "\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + command + "\"}}";
-		if (sender instanceof Player)
+		String json = "{\"text\":\"" + message + "\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\""
+				+ command + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":[{\"text\":\"" + hover
+				+ "\",\"color\":\"blue\"}]}}";
+
+		// Send clickable and hoverable message if sender is a player and if no exception is caught.
+		if (sender instanceof Player) {
 			try {
 				PacketSender.sendChatPacket((Player) sender, json);
 			} catch (Exception ex) {
-
-				plugin.getLogger()
-						.severe("Errors while trying to display clickable in /awf help command. Displaying standard message instead.");
+				plugin.getLogger().severe(
+						"Errors while trying to display clickable and hoverable message in /awf help command. Displaying standard message instead.");
 				sender.sendMessage(message);
 			}
-		else
+		} else {
 			sender.sendMessage(message);
+		}
 	}
 }

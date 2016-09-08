@@ -3,7 +3,6 @@ package com.hm.antiworldfly;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-import com.hm.antiworldfly.language.Lang;
 import com.hm.antiworldfly.particle.PacketSender;
 
 public class AntiWorldFlyRunnable implements Runnable {
@@ -31,16 +30,20 @@ public class AntiWorldFlyRunnable implements Runnable {
 		player.getPlayer().setFlying(false);
 
 		if (plugin.isChatMessage())
-			player.sendMessage(plugin.getChatHeader() + Lang.FLY_DISABLED_CHAT);
+			player.sendMessage(plugin.getChatHeader()
+					+ plugin.getPluginLang().getString("fly-disabled-chat", "Flying is disabled in this world."));
 
 		if (plugin.isTitleMessage()) {
 			try {
-				PacketSender.sendTitlePacket(player, "{\"text\":\"" + Lang.FLY_DISABLED_TITLE + "\"}", "{\"text\":\""
-						+ Lang.FLY_DISABLED_SUBTITLE + "\"}");
+				PacketSender.sendTitlePacket(player,
+						"{\"text\":\"" + plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly")
+								+ "\"}",
+						"{\"text\":\"" + plugin.getPluginLang().getString("fly-disabled-subtitle",
+								"Flying is disabled in this world.") + "\"}");
 			} catch (Exception ex) {
 
-				plugin.getLogger().severe(
-						"Errors while trying to display flying disabled title. Is your server up-to-date ?");
+				plugin.getLogger()
+						.severe("Errors while trying to display flying disabled title. Is your server up-to-date ?");
 				ex.printStackTrace();
 			}
 		}
