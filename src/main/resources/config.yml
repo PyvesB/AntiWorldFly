@@ -4,6 +4,9 @@
 # 1---------------------------------------------------------1 #
 #==============================o==============================#
 
+# Blocked commands only operate in the worlds in which flying is blocked.
+# Only spaces, no tabs. To check your file, use: yaml-online-parser.appspot.com
+# Default config.yml file: github.com/PyvesB/AntiWorldFly/blob/master/src/main/resources/config.yml
 # Visit the GitHub for some additional documentation: github.com/PyvesB/AntiWorldFly
 
 #=============================O=O=============================#
@@ -25,10 +28,10 @@ otherBlockedCommands: []
 # Enable or disable chat messages when joining a world.
 chatMessage: true
 
-# Enable or disable title screen messages when joining a world.
+# Enable or disable title screen messages when joining a world. Disable if running Minecraft 1.7.
 titleMessage: true
 
-# Enable (true) or disable (false) AntiWorlFly when in creative mode.
+# Enable (true) or disable (false) AntiWorlFly blocking when in creative mode.
 antiFlyCreative: true
 
 # Name of the language file.

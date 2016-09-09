@@ -12,10 +12,10 @@ commands:
     usage: /<command>
 permissions:
   antiworldfly.use:
-    description: Allows to parameter plugin with in-game commands.
+    description: Allows to use the enable, disable, add and remove commands.
     default: false
   antiworldfly.fly:
-    description: Allows to fly even if blocked by the plugin.
+    description: Allows to fly even if player is in a world blocked by the plugin.
     default: false  
   antiworldfly.*:
     description: Star notation of permissions, includes all of them.
