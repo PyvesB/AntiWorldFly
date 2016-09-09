@@ -63,6 +63,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private AntiWorldFlyPreProcess awfPreProcess;
 	private AntiWorldFlyWorldJoin awfWorldJoin;
 	private AntiWorldFlyPlayerJoin awfPlayerJoin;
+	private AntiWorldFlyToggleFly awfPlayerToggleFly;
 
 	// Used to check for plugin updates.
 	private UpdateChecker updateChecker;
@@ -71,7 +72,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private HelpCommand helpCommand;
 	private InfoCommand infoCommand;
 	private List<String> otherBlockedCommands;
-	private AntiWorldFlyToggleFly awfPlayerToggleFly;
 
 	/**
 	 * Constructor.
