@@ -346,7 +346,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 			String action = args[0].toLowerCase();
 
-			if (action.equals("disable")) {
+			if (action.equals("reload")) {
 
 				this.reloadConfig();
 				extractParametersFromConfig(false);
