@@ -30,7 +30,8 @@ public class AntiWorldFlyToggleFly implements Listener {
 		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
 			return;
 
-		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE)
+		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE
+				|| event.getPlayer().getGameMode() == GameMode.SPECTATOR)
 			return;
 
 		Player player = event.getPlayer();

@@ -29,6 +29,10 @@ public class AntiWorldFlyPreProcess implements Listener {
 		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
 			return;
 
+		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE
+				|| event.getPlayer().getGameMode() == GameMode.SPECTATOR)
+			return;
+
 		String command = event.getMessage().toLowerCase();
 
 		// Check for most common fly commands and aliases.
@@ -45,10 +49,8 @@ public class AntiWorldFlyPreProcess implements Listener {
 			for (String world : plugin.getAntiFlyWorlds()) {
 				if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 					// Schedule runnable to disable flying.
-					plugin.getServer()
-							.getScheduler()
-							.scheduleSyncDelayedTask(plugin,
-									new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
+					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
+							new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
 
 					break;
 

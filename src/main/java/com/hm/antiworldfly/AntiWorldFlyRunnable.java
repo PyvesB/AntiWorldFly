@@ -22,7 +22,8 @@ public class AntiWorldFlyRunnable implements Runnable {
 		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly"))
 			return;
 
-		if (!this.plugin.isAntiFlyCreative() && player.getGameMode() == GameMode.CREATIVE)
+		if (!this.plugin.isAntiFlyCreative() && player.getGameMode() == GameMode.CREATIVE
+				|| player.getGameMode() == GameMode.SPECTATOR)
 			return;
 
 		// Disable flying.
