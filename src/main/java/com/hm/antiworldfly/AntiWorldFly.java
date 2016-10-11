@@ -140,6 +140,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * 
 	 * @param attemptUpdate
 	 */
+	@SuppressWarnings("unchecked")
 	private void extractParametersFromConfig(boolean attemptUpdate) {
 
 		successfulLoad = true;
@@ -199,13 +200,13 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 			updateOldLanguage();
 		}
 
-		antiFlyWorlds = this.getConfig().getStringList("antiFlyWorlds");
-		chatMessage = this.getConfig().getBoolean("chatMessage", true);
-		titleMessage = this.getConfig().getBoolean("titleMessage", true);
-		antiFlyCreative = this.getConfig().getBoolean("antiFlyCreative", true);
-		notifyNotFlying = this.getConfig().getBoolean("notifyNotFlying", true);
-		otherBlockedCommands = this.getConfig().getStringList("otherBlockedCommands");
-		icon = StringEscapeUtils.unescapeJava(this.getConfig().getString("icon", "\u06DE"));
+		antiFlyWorlds = (List<String>) config.getList("antiFlyWorlds");
+		chatMessage = config.getBoolean("chatMessage", true);
+		titleMessage = config.getBoolean("titleMessage", true);
+		antiFlyCreative = config.getBoolean("antiFlyCreative", true);
+		notifyNotFlying = config.getBoolean("notifyNotFlying", true);
+		otherBlockedCommands = (List<String>) config.getList("otherBlockedCommands");
+		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
 
 		// Set to null in case user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
