@@ -37,6 +37,9 @@ antiFlyCreative: true
 # Notify player when entering a world in which flying is blocked even if he is not flying.
 notifyNotFlying: true
 
+# Set the icon of the plugin (default: '\u06DE').
+icon: '\u06DE'
+
 # Name of the language file.
 languageFileName: lang.yml
 

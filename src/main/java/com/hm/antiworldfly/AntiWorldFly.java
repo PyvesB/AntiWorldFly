@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -51,6 +52,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private boolean chatMessage;
 	private boolean antiFlyCreative;
 	private String chatHeader;
+	private String icon;
 	private boolean titleMessage;
 	private boolean notifyNotFlying;
 	private boolean successfulLoad;
@@ -121,7 +123,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 			successfulLoad = false;
 		}
 
-		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + "\u06DE" + ChatColor.GRAY + "] " + ChatColor.WHITE;
+		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
 
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
@@ -203,6 +205,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		antiFlyCreative = this.getConfig().getBoolean("antiFlyCreative", true);
 		notifyNotFlying = this.getConfig().getBoolean("notifyNotFlying", true);
 		otherBlockedCommands = this.getConfig().getStringList("otherBlockedCommands");
+		icon = StringEscapeUtils.unescapeJava(this.getConfig().getString("icon", "\u06DE"));
 
 		// Set to null in case user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
@@ -230,11 +233,16 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 					"Check for update on plugin launch and notify when an OP joins the game.");
 			updateDone = true;
 		}
-		
+
 		// Added in version 2.2:
 		if (!config.getKeys(false).contains("notifyNotFlying")) {
 			config.set("notifyNotFlying", true,
 					"Notify player when entering a world in which flying is blocked even if he is not flying.");
+			updateDone = true;
+		}
+
+		if (!config.getKeys(false).contains("icon")) {
+			config.set("icon", "\u06DE", "Set the icon of the plugin (default: '\u06DE').");
 			updateDone = true;
 		}
 
@@ -452,16 +460,20 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		return antiFlyCreative;
 	}
-	
+
 	public boolean isNotifyNotFlying() {
 
 		return notifyNotFlying;
 	}
 
-
 	public String getChatHeader() {
 
 		return chatHeader;
+	}
+
+	public String getIcon() {
+
+		return icon;
 	}
 
 	public YamlManager getPluginLang() {

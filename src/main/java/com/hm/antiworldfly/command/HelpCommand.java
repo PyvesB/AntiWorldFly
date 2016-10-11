@@ -24,8 +24,8 @@ public class HelpCommand {
 	public void getHelp(CommandSender sender) {
 
 		// Header.
-		sender.sendMessage(ChatColor.BLUE + "------------------ " + ChatColor.WHITE + ChatColor.BLUE + "\u06DE"
-				+ ChatColor.translateAlternateColorCodes('&', " &9AntiWorldFly ") + ChatColor.BLUE + "\u06DE"
+		sender.sendMessage(ChatColor.BLUE + "------------------ " + ChatColor.WHITE + ChatColor.BLUE + plugin.getIcon()
+				+ ChatColor.translateAlternateColorCodes('&', " &9AntiWorldFly ") + ChatColor.BLUE + plugin.getIcon()
 				+ ChatColor.WHITE + ChatColor.BLUE + " ------------------");
 
 		sendJsonClickableHoverableMessage(sender,
