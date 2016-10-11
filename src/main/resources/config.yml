@@ -34,6 +34,9 @@ titleMessage: true
 # Enable (true) or disable (false) AntiWorlFly blocking when in creative mode.
 antiFlyCreative: true
 
+# Notify player when entering a world in which flying is blocked even if he is not flying.
+notifyNotFlying: true
+
 # Name of the language file.
 languageFileName: lang.yml
 

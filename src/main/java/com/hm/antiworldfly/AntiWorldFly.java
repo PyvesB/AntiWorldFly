@@ -52,6 +52,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private boolean antiFlyCreative;
 	private String chatHeader;
 	private boolean titleMessage;
+	private boolean notifyNotFlying;
 	private boolean successfulLoad;
 
 	// Fields related to file handling.
@@ -200,6 +201,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		chatMessage = this.getConfig().getBoolean("chatMessage", true);
 		titleMessage = this.getConfig().getBoolean("titleMessage", true);
 		antiFlyCreative = this.getConfig().getBoolean("antiFlyCreative", true);
+		notifyNotFlying = this.getConfig().getBoolean("notifyNotFlying", true);
 		otherBlockedCommands = this.getConfig().getStringList("otherBlockedCommands");
 
 		// Set to null in case user changed the option and did a /awf reload. Do not recheck for update on /awf
@@ -226,6 +228,13 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		if (!config.getKeys(false).contains("checkForUpdate")) {
 			config.set("checkForUpdate", true,
 					"Check for update on plugin launch and notify when an OP joins the game.");
+			updateDone = true;
+		}
+		
+		// Added in version 2.2:
+		if (!config.getKeys(false).contains("notifyNotFlying")) {
+			config.set("notifyNotFlying", true,
+					"Notify player when entering a world in which flying is blocked even if he is not flying.");
 			updateDone = true;
 		}
 
@@ -443,6 +452,12 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		return antiFlyCreative;
 	}
+	
+	public boolean isNotifyNotFlying() {
+
+		return notifyNotFlying;
+	}
+
 
 	public String getChatHeader() {
 

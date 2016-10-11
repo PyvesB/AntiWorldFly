@@ -26,15 +26,12 @@ public class AntiWorldFlyRunnable implements Runnable {
 				|| player.getGameMode() == GameMode.SPECTATOR)
 			return;
 
-		// Disable flying.
-		player.setAllowFlight(false);
-		player.getPlayer().setFlying(false);
-
-		if (plugin.isChatMessage())
+		if (plugin.isChatMessage() && (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying()))
 			player.sendMessage(plugin.getChatHeader()
 					+ plugin.getPluginLang().getString("fly-disabled-chat", "Flying is disabled in this world."));
 
-		if (plugin.isTitleMessage()) {
+		if (plugin.isTitleMessage()
+				&& (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying())) {
 			try {
 				PacketSender.sendTitlePacket(player,
 						"{\"text\":\"" + plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly")
@@ -49,6 +46,8 @@ public class AntiWorldFlyRunnable implements Runnable {
 			}
 		}
 
+		// Disable flying.
+		player.setAllowFlight(false);
+		player.getPlayer().setFlying(false);
 	}
-
 }
