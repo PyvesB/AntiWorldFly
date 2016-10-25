@@ -21,6 +21,8 @@ public class InfoCommand {
 
 	/**
 	 * Display information about the plugin.
+	 * 
+	 * @param sender
 	 */
 	public void getInfo(CommandSender sender) {
 

@@ -31,18 +31,18 @@ public class UpdateChecker {
 	private volatile String version;
 
 	// Address of the rss feed to retrieve most recent version number.
-	private static final String BUKKIT_URL = "https://dev.bukkit.org/bukkit-plugins/advanced-achievements/files.rss";
+	private static final String BUKKIT_URL = "https://dev.bukkit.org/bukkit-plugins/anti-world-fly/files.rss";
 	// Alternative GitHub address, where version is in pom.xml.
-	private static final String GITHUB_URL = "https://raw.githubusercontent.com/PyvesB/AdvancedAchievements/master/pom.xml";
+	private static final String GITHUB_URL = "https://raw.githubusercontent.com/PyvesB/AntiWorldFly/master/pom.xml";
 
 	// Addresses of the project's download pages.
-	public static final String BUKKIT_DONWLOAD_URL = "- dev.bukkit.org/bukkit-plugins/advanced-achievements";
-	public static final String SPIGOT_DONWLOAD_URL = "- spigotmc.org/resources/advanced-achievements.6239";
+	public static final String BUKKIT_DONWLOAD_URL = "- dev.bukkit.org/bukkit-plugins/anti-world-fly";
+	public static final String SPIGOT_DONWLOAD_URL = "- spigotmc.org/resources/anti-world-fly.5357";
 
 	public UpdateChecker(AntiWorldFly plugin) {
 
 		this.plugin = plugin;
-		updateCheckerFutureTask = new FutureTask<Boolean>(new Callable<Boolean>() {
+		updateCheckerFutureTask = new FutureTask<>(new Callable<Boolean>() {
 
 			@Override
 			public Boolean call() throws Exception {

@@ -1,5 +1,7 @@
 package com.hm.antiworldfly;
 
+import java.util.logging.Level;
+
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
@@ -38,11 +40,8 @@ public class AntiWorldFlyRunnable implements Runnable {
 								+ "\"}",
 						"{\"text\":\"" + plugin.getPluginLang().getString("fly-disabled-subtitle",
 								"Flying is disabled in this world.") + "\"}");
-			} catch (Exception ex) {
-
-				plugin.getLogger()
-						.severe("Errors while trying to display flying disabled title. Is your server up-to-date ?");
-				ex.printStackTrace();
+			} catch (Exception e) {
+				plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ", e);
 			}
 		}
 

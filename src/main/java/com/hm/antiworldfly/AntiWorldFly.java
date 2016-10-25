@@ -3,6 +3,7 @@ package com.hm.antiworldfly;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -82,7 +83,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	public AntiWorldFly() {
 
 		disabled = false;
-		antiFlyWorlds = new ArrayList<String>();
+		antiFlyWorlds = new ArrayList<>();
 		fileManager = new FileManager(this);
 	}
 
@@ -151,13 +152,12 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		try {
 			config = fileManager.getNewConfig("config.yml");
 		} catch (IOException e) {
-			logger.severe("Error while loading configuration file.");
-			e.printStackTrace();
+			this.getLogger().log(Level.SEVERE, "Error while loading configuration file: ", e);
 			successfulLoad = false;
 		} catch (InvalidConfigurationException e) {
 			logger.severe("Error while loading configuration file, disabling plugin.");
-			logger.severe("Verify your syntax using the following logs and by visiting yaml-online-parser.appspot.com");
-			e.printStackTrace();
+			logger.log(Level.SEVERE,
+					"Verify your syntax by visiting yaml-online-parser.appspot.com and using the following logs: ", e);
 			successfulLoad = false;
 			this.getServer().getPluginManager().disablePlugin(this);
 			return;
@@ -166,13 +166,12 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		try {
 			lang = fileManager.getNewConfig(config.getString("languageFileName", "lang.yml"));
 		} catch (IOException e) {
-			logger.severe("Error while loading language file.");
-			e.printStackTrace();
+			this.getLogger().log(Level.SEVERE, "Error while loading language file: ", e);
 			successfulLoad = false;
 		} catch (InvalidConfigurationException e) {
 			logger.severe("Error while loading language file, disabling plugin.");
-			logger.severe("Verify your syntax using the following logs and by visiting yaml-online-parser.appspot.com");
-			e.printStackTrace();
+			logger.log(Level.SEVERE,
+					"Verify your syntax by visiting yaml-online-parser.appspot.com and using the following logs: ", e);
 			successfulLoad = false;
 			this.getServer().getPluginManager().disablePlugin(this);
 			return;
@@ -181,16 +180,14 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		try {
 			fileManager.backupFile("config.yml");
 		} catch (IOException e) {
-			logger.severe("Error while backing up configuration file.");
-			e.printStackTrace();
+			this.getLogger().log(Level.SEVERE, "Error while backing up configuration file: ", e);
 			successfulLoad = false;
 		}
 
 		try {
 			fileManager.backupFile(config.getString("languageFileName", "lang.yml"));
 		} catch (IOException e) {
-			logger.severe("Error while backing up language file.");
-			e.printStackTrace();
+			this.getLogger().log(Level.SEVERE, "Error while backing up language file: ", e);
 			successfulLoad = false;
 		}
 
@@ -253,8 +250,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 				config.saveConfig();
 				config.reloadConfig();
 			} catch (IOException e) {
-				this.getLogger().severe("Error while saving changes to the configuration file.");
-				e.printStackTrace();
+				this.getLogger().log(Level.SEVERE, "Error while saving changes to the configuration file: ", e);
 				successfulLoad = false;
 			}
 		}
@@ -321,8 +317,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 				lang.saveConfig();
 				lang.reloadConfig();
 			} catch (IOException e) {
-				this.getLogger().severe("Error while saving changes to the language file.");
-				e.printStackTrace();
+				this.getLogger().log(Level.SEVERE, "Error while saving changes to the language file: ", e);
 				successfulLoad = false;
 			}
 		}
@@ -341,22 +336,22 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * Called when a player or the console enters a command.
 	 */
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String args[]) {
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-		if (!cmd.getName().equalsIgnoreCase("awf"))
+		if (!"awf".equalsIgnoreCase(cmd.getName()))
 			return false;
 
-		if (args.length == 0 || args.length == 1 && args[0].equalsIgnoreCase("help")) {
+		if (args.length == 0 || args.length == 1 && "help".equalsIgnoreCase(args[0])) {
 
 			helpCommand.getHelp(sender);
 
-		} else if (args[0].equalsIgnoreCase("list")) {
+		} else if ("list".equalsIgnoreCase(args[0])) {
 
 			sender.sendMessage(chatHeader + lang.getString("words-blocked", "Worlds in which flying is blocked:"));
 			for (String world : antiFlyWorlds)
 				sender.sendMessage(" - " + world);
 
-		} else if (args[0].equalsIgnoreCase("info")) {
+		} else if ("info".equalsIgnoreCase(args[0])) {
 
 			infoCommand.getInfo(sender);
 
@@ -364,7 +359,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 			String action = args[0].toLowerCase();
 
-			if (action.equals("reload")) {
+			if ("reload".equals(action)) {
 
 				this.reloadConfig();
 				extractParametersFromConfig(false);
@@ -376,18 +371,18 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 								"Configuration successfully reloaded."));
 					this.getLogger().info("Configuration successfully reloaded.");
 				}
-			} else if (action.equals("disable")) {
+			} else if ("disable".equals(action)) {
 
 				disabled = true;
 				sender.sendMessage(chatHeader
 						+ lang.getString("awf-disabled", "AntiWorldFly disabled till next reload or /awf enable."));
 
-			} else if (action.equals("enable")) {
+			} else if ("enable".equals(action)) {
 
 				disabled = false;
 				sender.sendMessage(chatHeader + lang.getString("awf-enabled", "AntiWorldFly enabled."));
 
-			} else if (action.equals("add") && args.length == 2) {
+			} else if ("add".equals(action) && args.length == 2) {
 
 				antiFlyWorlds.add(args[1]);
 				config.set("antiFlyWorlds", antiFlyWorlds);
@@ -395,16 +390,15 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 					config.saveConfig();
 					config.reloadConfig();
 				} catch (IOException e) {
-					this.getLogger().severe("Error while adding world.");
+					this.getLogger().log(Level.SEVERE, "Error while adding world to the configuration file: ", e);
 					sender.sendMessage(chatHeader
 							+ lang.getString("command-error", "An error occurred while executing the command."));
-					e.printStackTrace();
 					return true;
 				}
 				sender.sendMessage(
 						chatHeader + lang.getString("world-added", "New world successfully added: ") + args[1]);
 
-			} else if (action.equals("remove") && args.length == 2) {
+			} else if ("remove".equals(action) && args.length == 2) {
 
 				for (int i = 0; i < antiFlyWorlds.size(); i++) {
 					if (antiFlyWorlds.get(i).equals(args[1]))
@@ -415,10 +409,9 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 					config.saveConfig();
 					config.reloadConfig();
 				} catch (IOException e) {
-					this.getLogger().severe("Error while removing world.");
+					this.getLogger().log(Level.SEVERE, "Error while removing world from the configuration file: ", e);
 					sender.sendMessage(chatHeader
 							+ lang.getString("command-error", "An error occurred while executing the command."));
-					e.printStackTrace();
 					return true;
 				}
 				sender.sendMessage(

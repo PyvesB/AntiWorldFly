@@ -59,7 +59,7 @@ public class AntiWorldFlyPreProcess implements Listener {
 		} else {
 			// Check if other commands were blocked by the user.
 			boolean otherBlockedCommand = false;
-			if (plugin.getOtherBlockedCommands().size() != 0)
+			if (!plugin.getOtherBlockedCommands().isEmpty())
 				for (String blockedCommand : plugin.getOtherBlockedCommands()) {
 					if (blockedCommand.equalsIgnoreCase(command))
 						otherBlockedCommand = true;
