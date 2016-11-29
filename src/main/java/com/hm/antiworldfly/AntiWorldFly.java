@@ -1,7 +1,6 @@
 package com.hm.antiworldfly;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +60,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	// Fields related to file handling.
 	private YamlManager config;
 	private YamlManager lang;
-	private FileManager fileManager;
+	private final FileManager fileManager;
 
 	// Plugin listeners.
 	private AntiWorldFlyPreProcess awfPreProcess;
@@ -83,7 +82,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	public AntiWorldFly() {
 
 		disabled = false;
-		antiFlyWorlds = new ArrayList<>();
 		fileManager = new FileManager(this);
 	}
 
@@ -141,7 +139,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * 
 	 * @param attemptUpdate
 	 */
-	@SuppressWarnings("unchecked")
 	private void extractParametersFromConfig(boolean attemptUpdate) {
 
 		successfulLoad = true;
@@ -197,12 +194,12 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 			updateOldLanguage();
 		}
 
-		antiFlyWorlds = (List<String>) config.getList("antiFlyWorlds");
+		antiFlyWorlds = config.getList("antiFlyWorlds");
 		chatMessage = config.getBoolean("chatMessage", true);
 		titleMessage = config.getBoolean("titleMessage", true);
 		antiFlyCreative = config.getBoolean("antiFlyCreative", true);
 		notifyNotFlying = config.getBoolean("notifyNotFlying", true);
-		otherBlockedCommands = (List<String>) config.getList("otherBlockedCommands");
+		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
 
 		// Set to null in case user changed the option and did a /awf reload. Do not recheck for update on /awf

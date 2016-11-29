@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.hm.antiworldfly.particle.PacketSender;
 import com.hm.antiworldfly.AntiWorldFly;
+import com.hm.antiworldfly.particle.PacketSender;
 
 /**
  * Class in charge of displaying the plugin's help (/awf help).
@@ -106,7 +106,7 @@ public class HelpCommand {
 		// Send clickable and hoverable message if sender is a player and if no exception is caught.
 		if (sender instanceof Player) {
 			try {
-				PacketSender.sendChatPacket((Player) sender, json);
+				PacketSender.sendChatPacket((Player) sender, json, PacketSender.CHAT_MESSAGE_BYTE);
 			} catch (Exception ex) {
 				plugin.getLogger().severe(
 						"Errors while trying to display clickable and hoverable message in /awf help command. Displaying standard message instead.");

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -23,9 +24,10 @@ import com.hm.antiworldfly.AntiWorldFly;
  */
 public class UpdateChecker {
 
-	private AntiWorldFly plugin;
+	private final AntiWorldFly plugin;
+	private final FutureTask<Boolean> updateCheckerFutureTask;
+
 	private Boolean updateNeeded = null;
-	private FutureTask<Boolean> updateCheckerFutureTask;
 	// Marked as volatile to ensure that once the updateCheckerFutureTask is done, the version is visible to the main
 	// thread of execution.
 	private volatile String version;
