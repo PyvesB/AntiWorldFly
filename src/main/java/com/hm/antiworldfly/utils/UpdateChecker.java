@@ -11,8 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.hm.antiworldfly.AntiWorldFly;
@@ -32,13 +30,11 @@ public class UpdateChecker {
 	// thread of execution.
 	private volatile String version;
 
-	// Address of the rss feed to retrieve most recent version number.
-	private static final String BUKKIT_URL = "https://dev.bukkit.org/bukkit-plugins/anti-world-fly/files.rss";
-	// Alternative GitHub address, where version is in pom.xml.
+	// GitHub address, where version is in pom.xml.
 	private static final String GITHUB_URL = "https://raw.githubusercontent.com/PyvesB/AntiWorldFly/master/pom.xml";
 
 	// Addresses of the project's download pages.
-	public static final String BUKKIT_DONWLOAD_URL = "- dev.bukkit.org/bukkit-plugins/anti-world-fly";
+	public static final String BUKKIT_DONWLOAD_URL = "- dev.bukkit.org/bukkit-plugins/anti-world-fly/files";
 	public static final String SPIGOT_DONWLOAD_URL = "- spigotmc.org/resources/anti-world-fly.5357";
 
 	public UpdateChecker(AntiWorldFly plugin) {
@@ -67,30 +63,14 @@ public class UpdateChecker {
 
 		plugin.getLogger().info("Checking for plugin update...");
 
-		URL filesFeed = new URL(BUKKIT_URL);
 		Document document = null;
-		boolean bukkit = true;
-
-		try (InputStream inputBukkit = filesFeed.openConnection().getInputStream()) {
-			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputBukkit);
-		} catch (Exception eB) {
-			// If XML parsing for Bukkit has failed (website down, address change, etc.), try on GitHub.
-			bukkit = false;
-			filesFeed = new URL(GITHUB_URL);
-			try (InputStream inputGithub = filesFeed.openConnection().getInputStream()) {
-				document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputGithub);
-			}
+		URL filesFeed = new URL(GITHUB_URL);
+		try (InputStream inputGithub = filesFeed.openConnection().getInputStream()) {
+			document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputGithub);
 		}
 
-		// Retrieve version information depending on whether Bukkit or GitHub was queried.
-		if (bukkit) {
-			Node latestFile = document.getElementsByTagName("item").item(0);
-			NodeList children = latestFile.getChildNodes();
-
-			version = children.item(1).getTextContent().replaceAll("[a-zA-Z ]", "");
-		} else {
-			version = document.getElementsByTagName("version").item(0).getTextContent();
-		}
+		// Retrieve version information.
+		version = document.getElementsByTagName("version").item(0).getTextContent();
 
 		if (version.equals(plugin.getDescription().getVersion()))
 			return false;
@@ -98,7 +78,7 @@ public class UpdateChecker {
 		// Version of current plugin.
 		String[] pluginVersion = plugin.getDescription().getVersion().split("\\.");
 
-		// Version of Bukkit's latest file.
+		// Version of GitHub's latest file.
 		String[] onlineVersion = version.split("\\.");
 
 		// Compare version numbers.
@@ -122,7 +102,7 @@ public class UpdateChecker {
 
 	private void logUpdate() {
 
-		plugin.getLogger().warning("Update available: v" + version + ". Download at one of the following:");
+		plugin.getLogger().warning("Update available: v" + version + "! Download at one of the following locations:");
 		plugin.getLogger().warning(BUKKIT_DONWLOAD_URL);
 		plugin.getLogger().warning(SPIGOT_DONWLOAD_URL);
 	}
