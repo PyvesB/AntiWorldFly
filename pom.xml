@@ -74,6 +74,10 @@
 			<id>Plugin Metrics</id>
 			<url>http://repo.mcstats.org/content/repositories/public/</url>
 		</repository>
+		<repository>
+			<id>MCShared-mvn-repo</id>
+			<url>https://raw.github.com/PyvesB/MCShared/mvn-repo/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -87,6 +91,12 @@
 			<groupId>org.mcstats.bukkit</groupId>
 			<artifactId>metrics-lite</artifactId>
 			<version>R8-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hm.mcshared</groupId>
+			<artifactId>MCShared</artifactId>
+			<version>1.0</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

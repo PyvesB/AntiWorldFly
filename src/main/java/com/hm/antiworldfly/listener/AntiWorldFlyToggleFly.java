@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 import com.hm.antiworldfly.AntiWorldFly;
-import com.hm.antiworldfly.particle.PacketSender;
+import com.hm.mcshared.particle.PacketSender;
 
 /**
  * Class to disable flying if a player manages to toggle flying.

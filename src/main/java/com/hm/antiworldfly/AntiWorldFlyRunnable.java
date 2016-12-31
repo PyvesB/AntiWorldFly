@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-import com.hm.antiworldfly.particle.PacketSender;
+import com.hm.mcshared.particle.PacketSender;
 
 public class AntiWorldFlyRunnable implements Runnable {
 
