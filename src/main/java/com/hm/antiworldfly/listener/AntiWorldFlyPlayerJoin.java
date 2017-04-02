@@ -18,13 +18,11 @@ public class AntiWorldFlyPlayerJoin implements Listener {
 	private AntiWorldFly plugin;
 
 	public AntiWorldFlyPlayerJoin(AntiWorldFly awf) {
-
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
-
 		for (String world : plugin.getAntiFlyWorlds()) {
 
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {

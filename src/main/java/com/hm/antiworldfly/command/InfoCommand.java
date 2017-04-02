@@ -15,7 +15,6 @@ public class InfoCommand {
 	private AntiWorldFly plugin;
 
 	public InfoCommand(AntiWorldFly plugin) {
-
 		this.plugin = plugin;
 	}
 
@@ -25,7 +24,6 @@ public class InfoCommand {
 	 * @param sender
 	 */
 	public void getInfo(CommandSender sender) {
-
 		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
 				+ plugin.getPluginLang().getString("version-command-name", "Name:") + " " + ChatColor.WHITE
 				+ plugin.getDescription().getName());

@@ -19,13 +19,11 @@ public class AntiWorldFlyPreProcess implements Listener {
 	private AntiWorldFly plugin;
 
 	public AntiWorldFlyPreProcess(AntiWorldFly awf) {
-
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-
 		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
 			return;
 
@@ -76,7 +74,6 @@ public class AntiWorldFlyPreProcess implements Listener {
 	 * @param event
 	 */
 	private void blockCommand(PlayerCommandPreprocessEvent event) {
-
 		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE)
 			return;
 

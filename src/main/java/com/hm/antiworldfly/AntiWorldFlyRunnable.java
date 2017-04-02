@@ -13,14 +13,12 @@ public class AntiWorldFlyRunnable implements Runnable {
 	private AntiWorldFly plugin;
 
 	public AntiWorldFlyRunnable(Player player, AntiWorldFly awf) {
-
 		this.player = player;
 		this.plugin = awf;
 	}
 
 	@Override
 	public void run() {
-
 		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly"))
 			return;
 

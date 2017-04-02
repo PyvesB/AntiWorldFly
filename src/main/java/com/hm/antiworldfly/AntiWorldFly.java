@@ -15,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.MetricsLite;
 
 import com.hm.antiworldfly.command.HelpCommand;
 import com.hm.antiworldfly.command.InfoCommand;
@@ -79,7 +78,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * Constructor.
 	 */
 	public AntiWorldFly() {
-
 		disabled = false;
 	}
 
@@ -88,7 +86,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 */
 	@Override
 	public void onEnable() {
-
 		// Start enabling plugin.
 		long startTime = System.currentTimeMillis();
 
@@ -119,14 +116,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 			updateChecker.launchUpdateCheckerTask();
 		}
 
-		try {
-			MetricsLite metrics = new MetricsLite(this);
-			metrics.start();
-		} catch (IOException e) {
-			this.getLogger().severe("Error while sending Metrics statistics.");
-			successfulLoad = false;
-		}
-
 		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
 
 		helpCommand = new HelpCommand(this);
@@ -145,7 +134,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * @param attemptUpdate
 	 */
 	private void extractParametersFromConfig(boolean attemptUpdate) {
-
 		successfulLoad = true;
 		Logger logger = this.getLogger();
 
@@ -219,7 +207,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * to 2.1 are not supported.
 	 */
 	private void updateOldConfiguration() {
-
 		boolean updateDone = false;
 
 		// Added in version 2.1:
@@ -263,7 +250,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 * are not supported.
 	 */
 	private void updateOldLanguage() {
-
 		boolean updateDone = false;
 
 		// Added in version 2.1:
@@ -330,7 +316,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 */
 	@Override
 	public void onDisable() {
-
 		this.getLogger().info("AntiWorldFly has been disabled.");
 	}
 
@@ -339,7 +324,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-
 		if (!"awf".equalsIgnoreCase(cmd.getName()))
 			return false;
 
@@ -430,60 +414,47 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		return true;
 	}
 
-	// Various getters and setters. Names are self-explanatory.
-
 	public boolean isDisabled() {
-
 		return disabled;
 	}
 
 	public List<String> getAntiFlyWorlds() {
-
 		return antiFlyWorlds;
 	}
 
 	public boolean isChatMessage() {
-
 		return chatMessage;
 	}
 
 	public boolean isTitleMessage() {
-
 		return titleMessage;
 	}
 
 	public boolean isAntiFlyCreative() {
-
 		return antiFlyCreative;
 	}
 
 	public boolean isNotifyNotFlying() {
-
 		return notifyNotFlying;
 	}
 
 	public String getChatHeader() {
-
 		return chatHeader;
 	}
 
 	public String getIcon() {
-
 		return icon;
 	}
 
 	public CommentedYamlConfiguration getPluginLang() {
-
 		return lang;
 	}
 
 	public List<String> getOtherBlockedCommands() {
-
 		return otherBlockedCommands;
 	}
 
 	public void setSuccessfulLoad(boolean successfulLoad) {
-
 		this.successfulLoad = successfulLoad;
 	}
 }

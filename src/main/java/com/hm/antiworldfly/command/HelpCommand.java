@@ -17,12 +17,10 @@ public class HelpCommand {
 	private AntiWorldFly plugin;
 
 	public HelpCommand(AntiWorldFly plugin) {
-
 		this.plugin = plugin;
 	}
 
 	public void getHelp(CommandSender sender) {
-
 		// Header.
 		sender.sendMessage(ChatColor.BLUE + "------------------ " + ChatColor.WHITE + ChatColor.BLUE + plugin.getIcon()
 				+ ChatColor.translateAlternateColorCodes('&', " &9AntiWorldFly ") + ChatColor.BLUE + plugin.getIcon()
@@ -97,7 +95,6 @@ public class HelpCommand {
 	 * @param hover
 	 */
 	public void sendJsonClickableHoverableMessage(CommandSender sender, String message, String command, String hover) {
-
 		// Build the json format string.
 		String json = "{\"text\":\"" + message + "\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\""
 				+ command + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":[{\"text\":\"" + hover

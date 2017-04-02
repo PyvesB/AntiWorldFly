@@ -20,13 +20,11 @@ public class AntiWorldFlyWorldJoin implements Listener {
 	private AntiWorldFly plugin;
 
 	public AntiWorldFlyWorldJoin(AntiWorldFly awf) {
-
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void worldJoin(PlayerChangedWorldEvent event) {
-
 		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
 			return;
 
@@ -41,10 +39,8 @@ public class AntiWorldFlyWorldJoin implements Listener {
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(
 						Bukkit.getPluginManager().getPlugin("AntiWorldFly"),
 						new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
-
 				break;
 			}
 		}
 	}
-
 }

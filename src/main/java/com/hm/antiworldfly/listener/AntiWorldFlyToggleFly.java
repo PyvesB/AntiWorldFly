@@ -22,13 +22,11 @@ public class AntiWorldFlyToggleFly implements Listener {
 	private AntiWorldFly plugin;
 
 	public AntiWorldFlyToggleFly(AntiWorldFly awf) {
-
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerToggleFlightEvent event) {
-
 		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
 			return;
 
@@ -64,7 +62,5 @@ public class AntiWorldFlyToggleFly implements Listener {
 				break;
 			}
 		}
-
 	}
-
 }
