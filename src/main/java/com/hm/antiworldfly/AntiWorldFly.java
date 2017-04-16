@@ -106,7 +106,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		extractParametersFromConfig(true);
 
 		// Check for available plugin update.
-		if (config.getBoolean("CheckForUpdate", true)) {
+		if (config.getBoolean("checkForUpdate", true)) {
 			updateChecker = new UpdateChecker(this,
 					"https://raw.githubusercontent.com/PyvesB/AntiWorldFly/master/pom.xml",
 					new String[] { "dev.bukkit.org/bukkit-plugins/anti-world-fly/files",
@@ -116,16 +116,15 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 			updateChecker.launchUpdateCheckerTask();
 		}
 
-		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
-
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
 
-		if (successfulLoad)
+		if (successfulLoad) {
 			this.getLogger().info("Plugin successfully enabled and ready to run! Took "
 					+ (System.currentTimeMillis() - startTime) + "ms.");
-		else
+		} else {
 			this.getLogger().severe("Error(s) while loading plugin. Please view previous logs for more information.");
+		}
 	}
 
 	/**
@@ -194,6 +193,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		notifyNotFlying = config.getBoolean("notifyNotFlying", true);
 		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
+		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
 
 		// Unregister events if user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
