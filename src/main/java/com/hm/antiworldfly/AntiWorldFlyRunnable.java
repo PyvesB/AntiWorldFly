@@ -23,7 +23,7 @@ public class AntiWorldFlyRunnable implements Runnable {
 			return;
 
 		if (!this.plugin.isAntiFlyCreative() && player.getGameMode() == GameMode.CREATIVE
-				|| player.getGameMode() == GameMode.SPECTATOR)
+				|| "SPECTATOR".equals(player.getGameMode().toString()))
 			return;
 
 		if (plugin.isChatMessage() && (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying()))
