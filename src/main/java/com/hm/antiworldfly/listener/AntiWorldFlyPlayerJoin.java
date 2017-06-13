@@ -24,12 +24,10 @@ public class AntiWorldFlyPlayerJoin implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		for (String world : plugin.getAntiFlyWorlds()) {
-
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 				// Schedule runnable to disable flying.
-				plugin.getServer()
-						.getScheduler()
-						.scheduleSyncDelayedTask(plugin, new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
+				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
+						new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
 
 				break;
 			}

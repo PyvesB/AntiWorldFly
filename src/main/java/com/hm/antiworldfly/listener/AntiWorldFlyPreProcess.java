@@ -24,48 +24,49 @@ public class AntiWorldFlyPreProcess implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
+		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly")) {
 			return;
+		}
 
 		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE
-				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString()))
+				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString())) {
 			return;
+		}
 
 		String command = event.getMessage().toLowerCase();
 
 		// Check for most common fly commands and aliases.
 		if (command.startsWith("/fly") || command.startsWith("/essentials:fly") || command.startsWith("/efly")) {
-
 			blockCommand(event);
 		}
 		// Check for creative mode commands.
 		else if (command.startsWith("/gm 1") || command.startsWith("/gamemode c") || command.startsWith("/gm c")) {
-
-			if (!this.plugin.isAntiFlyCreative())
+			if (!this.plugin.isAntiFlyCreative()) {
 				return;
+			}
 
 			for (String world : plugin.getAntiFlyWorlds()) {
 				if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 					// Schedule runnable to disable flying.
 					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
 							new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
-
 					break;
-
 				}
 			}
 		} else {
 			// Check if other commands were blocked by the user.
 			boolean otherBlockedCommand = false;
-			if (!plugin.getOtherBlockedCommands().isEmpty())
+			if (!plugin.getOtherBlockedCommands().isEmpty()) {
 				for (String blockedCommand : plugin.getOtherBlockedCommands()) {
 					if (blockedCommand.equalsIgnoreCase(command))
 						otherBlockedCommand = true;
 				}
-			if (otherBlockedCommand)
-				blockCommand(event);
-		}
+			}
 
+			if (otherBlockedCommand) {
+				blockCommand(event);
+			}
+		}
 	}
 
 	/**
@@ -74,8 +75,9 @@ public class AntiWorldFlyPreProcess implements Listener {
 	 * @param event
 	 */
 	private void blockCommand(PlayerCommandPreprocessEvent event) {
-		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE)
+		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE) {
 			return;
+		}
 
 		for (String world : plugin.getAntiFlyWorlds()) {
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
@@ -83,7 +85,6 @@ public class AntiWorldFlyPreProcess implements Listener {
 						.getString("command-disabled-chat", "Command is disabled in this world."));
 				event.setCancelled(true);
 				break;
-
 			}
 		}
 	}

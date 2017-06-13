@@ -19,16 +19,20 @@ public class AntiWorldFlyRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly"))
+		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly")) {
 			return;
+		}
 
 		if (!this.plugin.isAntiFlyCreative() && player.getGameMode() == GameMode.CREATIVE
-				|| "SPECTATOR".equals(player.getGameMode().toString()))
+				|| "SPECTATOR".equals(player.getGameMode().toString())) {
 			return;
+		}
 
-		if (plugin.isChatMessage() && (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying()))
+		if (plugin.isChatMessage()
+				&& (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying())) {
 			player.sendMessage(plugin.getChatHeader()
 					+ plugin.getPluginLang().getString("fly-disabled-chat", "Flying is disabled in this world."));
+		}
 
 		if (plugin.isTitleMessage()
 				&& (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying())) {

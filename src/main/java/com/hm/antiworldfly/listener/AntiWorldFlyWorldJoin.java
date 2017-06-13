@@ -25,15 +25,16 @@ public class AntiWorldFlyWorldJoin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void worldJoin(PlayerChangedWorldEvent event) {
-		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
+		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly")) {
 			return;
+		}
 
 		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE
-				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString()))
+				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString())) {
 			return;
+		}
 
 		for (String world : plugin.getAntiFlyWorlds()) {
-
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 				// Schedule runnable to disable flying.
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(

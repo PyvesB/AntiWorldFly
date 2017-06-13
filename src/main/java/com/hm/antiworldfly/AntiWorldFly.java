@@ -324,52 +324,39 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (!"awf".equalsIgnoreCase(cmd.getName()))
+		if (!"awf".equalsIgnoreCase(cmd.getName())) {
 			return false;
+		}
 
 		if (args.length == 0 || args.length == 1 && "help".equalsIgnoreCase(args[0])) {
-
 			helpCommand.getHelp(sender);
-
 		} else if ("list".equalsIgnoreCase(args[0])) {
-
 			sender.sendMessage(chatHeader + lang.getString("words-blocked", "Worlds in which flying is blocked:"));
-			for (String world : antiFlyWorlds)
+			for (String world : antiFlyWorlds) {
 				sender.sendMessage(" - " + world);
-
+			}
 		} else if ("info".equalsIgnoreCase(args[0])) {
-
 			infoCommand.getInfo(sender);
-
 		} else if (sender.hasPermission("antiworldfly.use")) {
-
 			String action = args[0].toLowerCase();
-
 			if ("reload".equals(action)) {
-
 				this.reloadConfig();
 				extractParametersFromConfig(false);
-
 				if (successfulLoad) {
-
-					if (sender instanceof Player)
+					if (sender instanceof Player) {
 						sender.sendMessage(chatHeader + lang.getString("configuration-successfully-reloaded",
 								"Configuration successfully reloaded."));
+					}
 					this.getLogger().info("Configuration successfully reloaded.");
 				}
 			} else if ("disable".equals(action)) {
-
 				disabled = true;
 				sender.sendMessage(chatHeader
 						+ lang.getString("awf-disabled", "AntiWorldFly disabled till next reload or /awf enable."));
-
 			} else if ("enable".equals(action)) {
-
 				disabled = false;
 				sender.sendMessage(chatHeader + lang.getString("awf-enabled", "AntiWorldFly enabled."));
-
 			} else if ("add".equals(action) && args.length == 2) {
-
 				antiFlyWorlds.add(args[1]);
 				config.set("antiFlyWorlds", antiFlyWorlds);
 				try {
@@ -383,12 +370,11 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 				}
 				sender.sendMessage(
 						chatHeader + lang.getString("world-added", "New world successfully added: ") + args[1]);
-
 			} else if ("remove".equals(action) && args.length == 2) {
-
 				for (int i = 0; i < antiFlyWorlds.size(); i++) {
-					if (antiFlyWorlds.get(i).equals(args[1]))
+					if (antiFlyWorlds.get(i).equals(args[1])) {
 						antiFlyWorlds.remove(i);
+					}
 				}
 				config.set("antiFlyWorlds", antiFlyWorlds);
 				try {
@@ -402,11 +388,9 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 				}
 				sender.sendMessage(
 						chatHeader + lang.getString("world-removed", "World successfully removed: ") + args[1]);
-
 			} else
 				sender.sendMessage(
 						chatHeader + lang.getString("misused-command", "Misused command. Please type /awf."));
-
 		} else
 			sender.sendMessage(
 					chatHeader + lang.getString("no-permissions", "You do not have the permission to do this."));

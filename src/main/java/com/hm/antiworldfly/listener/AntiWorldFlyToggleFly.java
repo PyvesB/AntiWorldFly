@@ -27,26 +27,28 @@ public class AntiWorldFlyToggleFly implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerToggleFlightEvent event) {
-		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly"))
+		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly")) {
 			return;
+		}
 
 		if (!this.plugin.isAntiFlyCreative() && event.getPlayer().getGameMode() == GameMode.CREATIVE
-				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString()))
+				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString())) {
 			return;
+		}
 
 		Player player = event.getPlayer();
 
 		for (String world : plugin.getAntiFlyWorlds()) {
-
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
 				// Disable flying.
 				player.setAllowFlight(false);
 				player.getPlayer().setFlying(false);
 				event.setCancelled(true);
 
-				if (plugin.isChatMessage())
+				if (plugin.isChatMessage()) {
 					player.sendMessage(plugin.getChatHeader() + plugin.getPluginLang().getString("fly-disabled-chat",
 							"Flying is disabled in this world."));
+				}
 
 				if (plugin.isTitleMessage()) {
 					try {

@@ -39,43 +39,48 @@ public class HelpCommand {
 				"/awf info", plugin.getPluginLang().getString("awf-command-info-hover",
 						"Some extra info about the plugin and its awesome author!"));
 
-		if (sender.hasPermission("antiworldfly.use"))
+		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender,
 					plugin.getChatHeader() + ChatColor.BLUE + "/awf reload" + ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-reload",
 									"Reload the plugin's configuration."),
 					"/awf reload", plugin.getPluginLang().getString("awf-command-reload-hover",
 							"Reload most settings in config.yml and lang.yml files."));
+		}
 
-		if (sender.hasPermission("antiworldfly.use"))
+		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender,
 					plugin.getChatHeader() + ChatColor.BLUE + "/awf enable" + ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-enable", "Enable plugin."),
 					"/awf enable", plugin.getPluginLang().getString("awf-command-enable-hover",
 							"Plugin enabled by default. Use this if you entered /awf disable before!"));
+		}
 
-		if (sender.hasPermission("antiworldfly.use"))
+		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender,
 					plugin.getChatHeader() + ChatColor.BLUE + "/awf disable" + ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-disable", "Disable plugin."),
 					"/awf disable", plugin.getPluginLang().getString("awf-command-disable-hover",
 							"The plugin will not work until next reload or /awf enable."));
+		}
 
-		if (sender.hasPermission("antiworldfly.use"))
+		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender,
 					plugin.getChatHeader() + ChatColor.BLUE + "/awf add &oworld&r" + ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-add", "Add WORLD to blocked worlds.")
 									.replace("WORLD", "&oworld&r"),
 					"/awf add world", plugin.getPluginLang().getString("awf-command-add-hover",
 							"Make sure you specify the correct name!"));
+		}
 
-		if (sender.hasPermission("antiworldfly.use"))
+		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender, plugin.getChatHeader() + ChatColor.BLUE + "/awf remove &oworld&r"
 					+ ChatColor.WHITE + " > "
 					+ plugin.getPluginLang().getString("awf-command-remove", "Remove WORLD from blocked worlds.")
 							.replace("WORLD", "&oworld&r"),
 					"/awf remove world",
 					plugin.getPluginLang().getString("awf-command-remove-hover", "World must be listed in /awf list."));
+		}
 
 		// Empty line.
 		sender.sendMessage(ChatColor.BLUE + " ");
