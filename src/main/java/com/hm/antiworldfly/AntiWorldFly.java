@@ -54,6 +54,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 	private String icon;
 	private boolean titleMessage;
 	private boolean notifyNotFlying;
+	private boolean toggleFlyingInNonBlockedWorlds;
 	private boolean successfulLoad;
 
 	// Fields related to file handling.
@@ -191,6 +192,7 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		titleMessage = config.getBoolean("titleMessage", true);
 		antiFlyCreative = config.getBoolean("antiFlyCreative", true);
 		notifyNotFlying = config.getBoolean("notifyNotFlying", true);
+		toggleFlyingInNonBlockedWorlds = config.getBoolean("toggleFlyingInNonBlockedWorlds", false);
 		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
 		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
@@ -225,6 +227,13 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		if (!config.getKeys(false).contains("notifyNotFlying")) {
 			config.set("notifyNotFlying", true,
 					"Notify player when entering a world in which flying is blocked even if he is not flying.");
+			updateDone = true;
+		}
+
+		// Added in version 2.3:
+		if (!config.getKeys(false).contains("toggleFlyingInNonBlockedWorlds")) {
+			config.set("toggleFlyingInNonBlockedWorlds", false,
+					"When true, a player entering a world not listed in antiFlyWorlds will automatically start flying.");
 			updateDone = true;
 		}
 
@@ -420,6 +429,10 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 	public boolean isNotifyNotFlying() {
 		return notifyNotFlying;
+	}
+
+	public boolean isToggleFlyingInNonBlockedWorlds() {
+		return toggleFlyingInNonBlockedWorlds;
 	}
 
 	public String getChatHeader() {

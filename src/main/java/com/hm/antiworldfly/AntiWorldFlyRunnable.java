@@ -49,6 +49,6 @@ public class AntiWorldFlyRunnable implements Runnable {
 
 		// Disable flying.
 		player.setAllowFlight(false);
-		player.getPlayer().setFlying(false);
+		player.setFlying(false);
 	}
 }

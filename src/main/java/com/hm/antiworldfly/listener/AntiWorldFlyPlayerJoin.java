@@ -1,5 +1,6 @@
 package com.hm.antiworldfly.listener;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -23,14 +24,20 @@ public class AntiWorldFlyPlayerJoin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		Player player = event.getPlayer();
 		for (String world : plugin.getAntiFlyWorlds()) {
-			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
+			if (player.getWorld().getName().equalsIgnoreCase(world)) {
 				// Schedule runnable to disable flying.
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
-						new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
-
-				break;
+						new AntiWorldFlyRunnable(player, plugin), 20);
+				return;
 			}
+		}
+
+		if (plugin.isToggleFlyingInNonBlockedWorlds()) {
+			// Enable flying.
+			player.setAllowFlight(true);
+			player.setFlying(true);
 		}
 	}
 
