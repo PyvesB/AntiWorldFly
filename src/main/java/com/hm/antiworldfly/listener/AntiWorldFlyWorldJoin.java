@@ -46,10 +46,12 @@ public class AntiWorldFlyWorldJoin implements Listener {
 			}
 		}
 
-		if (plugin.isToggleFlyingInNonBlockedWorlds()) {
+		if (plugin.isToggleFlyingInNonBlockedWorlds() && !player.getAllowFlight()) {
 			// Enable flying.
 			player.setAllowFlight(true);
-			player.setFlying(true);
+			if (!player.isOnGround()) {
+				player.setFlying(true);
+			}
 		}
 	}
 }
