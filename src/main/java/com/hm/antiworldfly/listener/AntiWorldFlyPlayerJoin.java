@@ -34,7 +34,8 @@ public class AntiWorldFlyPlayerJoin implements Listener {
 			}
 		}
 
-		if (plugin.isToggleFlyingInNonBlockedWorlds() && !player.getAllowFlight()) {
+		if (plugin.isToggleFlyingInNonBlockedWorlds() && !player.getAllowFlight()
+				&& (player.hasPermission("antiworldfly.fly") || player.hasPermission("essentials.fly"))) {
 			// Enable flying.
 			player.setAllowFlight(true);
 			if (!player.isOnGround()) {

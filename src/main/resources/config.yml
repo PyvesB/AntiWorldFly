@@ -38,6 +38,7 @@ antiFlyCreative: true
 notifyNotFlying: true
 
 # A player entering a world not listed in antiFlyWorlds will have flying enabled and automatically start flying if not on the ground.
+# Player must have either antiworldfly.fly or essentials.fly permissions for this feature to be effective.
 toggleFlyingInNonBlockedWorlds: false
 
 # Set the icon of the plugin (default: '\u06DE').

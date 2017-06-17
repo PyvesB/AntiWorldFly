@@ -232,8 +232,9 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		// Added in version 2.3:
 		if (!config.getKeys(false).contains("toggleFlyingInNonBlockedWorlds")) {
-			config.set("toggleFlyingInNonBlockedWorlds", false,
-					"A player entering a world not listed in antiFlyWorlds will have flying enabled and automatically start flying if not on the ground.");
+			config.set("toggleFlyingInNonBlockedWorlds", false, new String[] {
+					"A player entering a world not listed in antiFlyWorlds will have flying enabled and automatically start flying if not on the ground.",
+					"Player must have either antiworldfly.fly or essentials.fly permissions for this feature to be effective." });
 			updateDone = true;
 		}
 
