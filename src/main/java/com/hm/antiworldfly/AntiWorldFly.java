@@ -11,17 +11,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.hm.antiworldfly.command.HelpCommand;
 import com.hm.antiworldfly.command.InfoCommand;
-import com.hm.antiworldfly.listener.AntiWorldFlyPlayerJoin;
 import com.hm.antiworldfly.listener.AntiWorldFlyPreProcess;
 import com.hm.antiworldfly.listener.AntiWorldFlyToggleFly;
-import com.hm.antiworldfly.listener.AntiWorldFlyWorldJoin;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
 import com.hm.mcshared.update.UpdateChecker;
 
@@ -43,7 +40,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * @author DarkPyves
  */
 
-public class AntiWorldFly extends JavaPlugin implements Listener {
+public class AntiWorldFly extends JavaPlugin {
 
 	// Plugin options and various parameters.
 	private List<String> antiFlyWorlds;
@@ -63,8 +60,6 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 	// Plugin listeners.
 	private AntiWorldFlyPreProcess awfPreProcess;
-	private AntiWorldFlyWorldJoin awfWorldJoin;
-	private AntiWorldFlyPlayerJoin awfPlayerJoin;
 	private AntiWorldFlyToggleFly awfPlayerToggleFly;
 
 	// Used to check for plugin updates.
@@ -93,15 +88,11 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 		this.getLogger().info("Registering listeners...");
 
 		awfPreProcess = new AntiWorldFlyPreProcess(this);
-		awfWorldJoin = new AntiWorldFlyWorldJoin(this);
-		awfPlayerJoin = new AntiWorldFlyPlayerJoin(this);
 		awfPlayerToggleFly = new AntiWorldFlyToggleFly(this);
 
 		PluginManager pm = getServer().getPluginManager();
 
 		pm.registerEvents(awfPreProcess, this);
-		pm.registerEvents(awfWorldJoin, this);
-		pm.registerEvents(awfPlayerJoin, this);
 		pm.registerEvents(awfPlayerToggleFly, this);
 
 		extractParametersFromConfig(true);
@@ -119,6 +110,8 @@ public class AntiWorldFly extends JavaPlugin implements Listener {
 
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
+
+		getServer().getScheduler().runTaskTimer(this, new AntiWorldFlyRunnable(this), 0, 20);
 
 		if (successfulLoad) {
 			this.getLogger().info("Plugin successfully enabled and ready to run! Took "

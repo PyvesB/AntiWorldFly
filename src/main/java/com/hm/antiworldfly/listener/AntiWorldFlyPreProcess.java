@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import com.hm.antiworldfly.AntiWorldFly;
-import com.hm.antiworldfly.AntiWorldFlyRunnable;
 
 /**
  * Class to block some commands specified by the user in the config.
@@ -43,15 +42,6 @@ public class AntiWorldFlyPreProcess implements Listener {
 		else if (command.startsWith("/gm 1") || command.startsWith("/gamemode c") || command.startsWith("/gm c")) {
 			if (!this.plugin.isAntiFlyCreative()) {
 				return;
-			}
-
-			for (String world : plugin.getAntiFlyWorlds()) {
-				if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {
-					// Schedule runnable to disable flying.
-					plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
-							new AntiWorldFlyRunnable(event.getPlayer(), plugin), 20);
-					break;
-				}
 			}
 		} else {
 			// Check if other commands were blocked by the user.
