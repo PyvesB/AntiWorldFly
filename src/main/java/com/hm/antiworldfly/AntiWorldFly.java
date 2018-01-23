@@ -11,7 +11,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,7 +42,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * @author DarkPyves
  */
 
-public class AntiWorldFly extends JavaPlugin implements Listener {
+public class AntiWorldFly extends JavaPlugin {
 
 	// Plugin options and various parameters.
 	private List<String> antiFlyWorlds;
