@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 import com.hm.antiworldfly.AntiWorldFly;
-import com.hm.mcshared.particle.PacketSender;
+import com.hm.mcshared.particle.FancyMessageSender;
 
 /**
  * Class to disable flying if a player manages to toggle flying.
@@ -52,10 +52,9 @@ public class AntiWorldFlyToggleFly implements Listener {
 
 				if (plugin.isTitleMessage()) {
 					try {
-						PacketSender.sendTitlePacket(player, "{\"text\":\""
-								+ plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly") + "\"}",
-								"{\"text\":\"" + plugin.getPluginLang().getString("fly-disabled-subtitle",
-										"Flying is disabled in this world.") + "\"}");
+						FancyMessageSender.sendTitle(player,
+								plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
+								plugin.getPluginLang().getString("fly-disabled-subtitle", "Flying is disabled in this world."));
 					} catch (Exception e) {
 						plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ",
 								e);

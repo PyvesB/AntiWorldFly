@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.hm.antiworldfly.AntiWorldFly;
-import com.hm.mcshared.particle.PacketSender;
+import com.hm.mcshared.particle.FancyMessageSender;
 
 /**
  * Class in charge of displaying the plugin's help (/awf help).
@@ -100,15 +100,10 @@ public class HelpCommand {
 	 * @param hover
 	 */
 	public void sendJsonClickableHoverableMessage(CommandSender sender, String message, String command, String hover) {
-		// Build the json format string.
-		String json = "{\"text\":\"" + message + "\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\""
-				+ command + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":[{\"text\":\"" + hover
-				+ "\",\"color\":\"blue\"}]}}";
-
 		// Send clickable and hoverable message if sender is a player and if no exception is caught.
 		if (sender instanceof Player) {
 			try {
-				PacketSender.sendChatMessagePacket((Player) sender, json);
+				FancyMessageSender.sendHoverableCommandMessage((Player) sender, message, command, hover, "blue");
 			} catch (Exception ex) {
 				plugin.getLogger().severe(
 						"Errors while trying to display clickable and hoverable message in /awf help command. Displaying standard message instead.");

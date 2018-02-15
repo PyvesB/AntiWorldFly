@@ -108,8 +108,7 @@ public class AntiWorldFly extends JavaPlugin {
 		// Check for available plugin update.
 		if (config.getBoolean("checkForUpdate", true)) {
 			updateChecker = new UpdateChecker(this, "https://raw.githubusercontent.com/PyvesB/AntiWorldFly/master/pom.xml",
-					"antiworldfly.use", chatHeader, "spigotmc.org/resources/anti-world-fly.5357",
-					"dev.bukkit.org/bukkit-plugins/anti-world-fly/files");
+					"antiworldfly.use", chatHeader, "spigotmc.org/resources/anti-world-fly.5357");
 			pm.registerEvents(updateChecker, this);
 			updateChecker.launchUpdateCheckerTask();
 		}
