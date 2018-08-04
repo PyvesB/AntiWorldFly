@@ -1,0 +1,57 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |        Archivo de lenguaje para Anti World Fly 2.3     | #
+# |                      Por NekoShouta                    | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "No tienes permiso para hacer esto."
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Configuración recargada."
+configuration-reload-failed: "Ha ocurrido un error al recargar el plugin. Comprueba la consola para ver más información."
+words-blocked: "Mundos en los que el fly está desactivado:"
+awf-disabled: "El plugin ha sido desactivado hasta el próximo reload."
+awf-enabled: "AntiWorldFly activado."
+world-added: "Mundo agregado: "
+world-removed: "Mundo eliminado: "
+misused-command: "Comando desconocido. Prueba a usar /awf."
+command-error: "Ha ocurrido un error interno al ejecutar este comando." 
+
+# Related to informational messages.
+fly-disabled-chat: "No se permite volar en este mundo."
+fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-subtitle: "No se permite volar en este mundo."
+command-disabled-chat: "Este comando ha sido deshabilitado."
+
+# Related to /awf help.
+awf-command-disable: "Desactivar el plugin hasta el próximo reinicio."
+awf-command-enable: "Activar el plugin."
+awf-command-list: "Lista de mundos con AntiWorldFly."
+awf-command-add: "Agregar el mundo a la lista de mundos bloqueados."
+awf-command-reload: "Recargar la configuración del plugin."
+awf-command-info: "Mostrar información detallada del plugin."
+awf-command-remove: "Eliminar el mundo de la lista de mundos bloqueados."
+awf-command-disable-hover: "El plugin no funcionará hasta el próximo reinicio."
+awf-command-enable-hover: "El fly ya está desactivado en este mundo!"
+awf-command-list-hover: "El fly y algunos comandos estan desactivados en algunos mundos."
+awf-command-add-hover: "Has especificado el nombre correcto?"
+awf-command-reload-hover: "Recargar el plugin (config.yml y lang.yml)."
+awf-command-info-hover: "Información extra sobre el plugin!"
+awf-command-remove-hover: "El mundo tiene que estar en /awf list."
+awf-tip: "&lTIP&r &7Puedes &f&n&oseleccionar&r &7o &f&n&ohacer click&r &7en los comandos!"
+
+# Related to /awf info.
+version-command-name: "Nombre:"
+version-command-version: "Versión:"
+version-command-website: "Sitio web:"
+version-command-author: "Autor:"
+version-command-description: "Descripción:"
+version-command-description-details: "Este plugin activa y desactiva comandos (incluido el modo de vuelo) al entrar en un mundo."
+version-command-enabled: "Plugin activado:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
