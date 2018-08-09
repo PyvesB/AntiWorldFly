@@ -137,6 +137,7 @@ public class AntiWorldFly extends JavaPlugin {
 
 		try {
 			config = new CommentedYamlConfiguration("config.yml", this);
+			config.loadConfiguration();
 		} catch (IOException e) {
 			this.getLogger().log(Level.SEVERE, "Error while loading configuration file: ", e);
 			successfulLoad = false;
@@ -151,6 +152,7 @@ public class AntiWorldFly extends JavaPlugin {
 
 		try {
 			lang = new CommentedYamlConfiguration(config.getString("languageFileName", "lang.yml"), this);
+			lang.loadConfiguration();
 		} catch (IOException e) {
 			this.getLogger().log(Level.SEVERE, "Error while loading language file: ", e);
 			successfulLoad = false;
