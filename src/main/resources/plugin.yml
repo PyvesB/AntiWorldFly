@@ -5,6 +5,7 @@ author: DarkPyves
 load: POSTWORLD
 description: A plugin to disable flying and chosen commands when joining or playing in specific worlds.
 website: https://github.com/PyvesB/AntiWorldFly
+api-version: 1.13
 commands:
   awf:
     description: Main AntiWorldFly command, use it to list sub-commands. 
