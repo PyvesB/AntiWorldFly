@@ -1,0 +1,59 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Anti World Fly 2.3.5 Finnish language file       | #
+# |                       By Rsl1122                       | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "Sinulla ei ole lupaa tähän."
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Asetustiedostot ladattu onnistuneesti."
+configuration-reload-failed: "Virheitä ladatessa asetustiedostoja. Tarkista lokit saadaksesi lisätietoa."
+
+# Related to other plugin commands.
+words-blocked: "Maailmat joissa lentäminen on estetty:"
+awf-disabled: "AntiWorldFly poistettu käytöstä seuraavaan lataukseen tai /awf enable asti."
+awf-enabled: "AntiWorldFly otettu käyttöön."
+world-added: "Uusi maailma lisätty onnistuneesti: "
+world-removed: "Maailma poistettu onnistuneesti: "
+misused-command: "Väärin käytetty komento. Käytä mielummin /awf."
+command-error: "Komentoa suritettaessa tapahtui virhe." 
+
+# Related to informational messages.
+fly-disabled-chat: "Lentäminen on estetty tässä maailmassa."
+fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-subtitle: "Lentäminen on estetty tässä maailmassa."
+command-disabled-chat: "Komento on estetty tässä maailmassa."
+
+# Related to /awf help.
+awf-command-disable: "Poista AWF käytöstä seuraavaan lataukseen asti"
+awf-command-enable: "Ota AWF käyttöön (jos poistettu käytöstä)."
+awf-command-list: "Listaa maailmat joissa AWF on toiminnassa."
+awf-command-add: "Lisää WORLD estettyihin maailmoihin."
+awf-command-reload: "Lataa AWF asetukset uudelleen."
+awf-command-info: "Tarkastele tietoja pluginista."
+awf-command-remove: "Poista WORLD estetyistä maailmoista."
+awf-command-disable-hover: "AWF ei toimi ennen seuraavaa latausta tai /awf enable komentoa."
+awf-command-enable-hover: "AWF on tavallisesti päällä. Käytä tätä jos käytit /awf disable aikaisemmin!"
+awf-command-list-hover: "Lentäminen ja tietyt komennot ovat estetty näissä maailmoissa."
+awf-command-add-hover: "Varmista että käytit oikeaa nimeä!"
+awf-command-reload-hover: "Lataa useimmat asetukset config.yml ja lang.yml tiedostoista."
+awf-command-info-hover: "Lisätietoa pluginista ja sen mahtavasta tekijästä!"
+awf-command-remove-hover: "Maailma tulee olla listattuna /awf list:ssa."
+awf-tip: "&lHINT&r &8Voit &7&n&opitää hiirtä&r &8tai &7&n&oclick&r &8komentojen päällä!"
+
+# Related to /awf info.
+version-command-name: "Nimi:"
+version-command-version: "Versio:"
+version-command-website: "Sivusto:"
+version-command-author: "Tekijä:"
+version-command-description: "Kuvaus:"
+version-command-description-details: "Plugin jolla estää lentäminen ja valitut komennot liityttäessä tai pelatessa tietyissä maailmoissa."
+version-command-enabled: "Plugin käynnistetty:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
