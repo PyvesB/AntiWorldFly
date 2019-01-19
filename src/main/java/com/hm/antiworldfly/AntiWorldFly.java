@@ -193,7 +193,7 @@ public class AntiWorldFly extends JavaPlugin {
 		toggleFlyingInNonBlockedWorlds = config.getBoolean("toggleFlyingInNonBlockedWorlds", false);
 		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
-		chatHeader = ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE;
+		chatHeader = icon.isEmpty() ? ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE : "";
 
 		// Unregister events if user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
