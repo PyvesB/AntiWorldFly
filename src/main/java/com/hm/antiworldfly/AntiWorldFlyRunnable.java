@@ -2,6 +2,7 @@ package com.hm.antiworldfly;
 
 import java.util.logging.Level;
 
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
@@ -9,8 +10,8 @@ import com.hm.mcshared.particle.FancyMessageSender;
 
 public class AntiWorldFlyRunnable implements Runnable {
 
-	private Player player;
-	private AntiWorldFly plugin;
+	private final Player player;
+	private final AntiWorldFly plugin;
 
 	public AntiWorldFlyRunnable(Player player, AntiWorldFly awf) {
 		this.player = player;
@@ -37,9 +38,11 @@ public class AntiWorldFlyRunnable implements Runnable {
 		if (plugin.isTitleMessage()
 				&& (plugin.isNotifyNotFlying() || !plugin.isNotifyNotFlying() && player.isFlying())) {
 			try {
-				FancyMessageSender.sendTitle(player,
-						plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
+				String title = ChatColor.translateAlternateColorCodes('&',
+						plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"));
+				String subtitle = ChatColor.translateAlternateColorCodes('&',
 						plugin.getPluginLang().getString("fly-disabled-subtitle", "Flying is disabled in this world."));
+				FancyMessageSender.sendTitle(player, title, subtitle);
 			} catch (Exception e) {
 				plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ", e);
 			}
