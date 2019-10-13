@@ -1,0 +1,59 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Anti World Fly 2.3.7 Russian language file       | #
+# |                      By danechek                       | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "У вас нет прав!"
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Конфигурация успешно перезагружена"
+configuration-reload-failed: "Ошибки при перезагрузке конфигурации. Смотрите логи, чтобы узнать подробнее"
+
+# Related to other plugin commands.
+words-blocked: "Миры, в которых полёт запрещён:"
+awf-disabled: "AntiWorldFly отключён до следующей перезагрузки или до использования /awf enable"
+awf-enabled: "AntiWorldFly включён"
+world-added: "Мир успешно добавлен: "
+world-removed: "Мир успешно удалён: "
+misused-command: "Неправильная команда. Пожалуйста, используйте /awf"
+command-error: "Произошла ошибка при выполнении команды" 
+
+# Related to informational messages.
+fly-disabled-chat: "Полёт запрещён в этом мире"
+fly-disabled-title: "&9Анти-полёт"
+fly-disabled-subtitle: "Полёт запрещён в этом мире"
+command-disabled-chat: "Команда отключена в этом мире"
+
+# Related to /awf help.
+awf-command-disable: "Отключает плагин до следующего включения"
+awf-command-enable: "Включает плагин (если был выключен)"
+awf-command-list: "Список миров, в которых работает AWF"
+awf-command-add: "Добавляет мир в список запрещённых для полёта"
+awf-command-reload: "Перезагружает конфигурацию плагина"
+awf-command-info: "Отображение различной информации о плагине"
+awf-command-remove: "Удаляет мир из списка запрещённых для полёта"
+awf-command-disable-hover: "Плагин будет отключён до следующей перезагрузки или использования /awf enable"
+awf-command-enable-hover: "Плагин включён по умолчанию. Используйте это, если вы ввели /awf disable раньше!"
+awf-command-list-hover: "Полеты и некоторые конкретные команды отключены в этих мирах."
+awf-command-add-hover: "Убедитесь, что вы указали правильное имя!"
+awf-command-reload-hover: "Перезагружает большинство настроек в config.yml и lang.yml"
+awf-command-info-hover: "Дополнительная информация о плагине и его замечательном авторе!"
+awf-command-remove-hover: "Мир должен быть указан в /awf list"
+awf-tip: "&lСОВЕТ&r &7Вы можете &f&n&oнаводить курсор&r &7или &f&n&oкликать&r &7по командам!"
+
+# Related to /awf info.
+version-command-name: "Название:"
+version-command-version: "Версия:"
+version-command-website: "Вебсайт:"
+version-command-author: "Автор:"
+version-command-description: "Описание:"
+version-command-description-details: "Плагин для отключения полёта и выбранных команд в определённых мирах"
+version-command-enabled: "Плагин включён:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
