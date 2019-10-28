@@ -1,5 +1,5 @@
 <p align="center">
-<img src ="http://images.jupload.fr/1442400224.png" />
+<img src ="https://github.com/PyvesB/AntiWorldFly/blob/master/images/banner.png?raw=true" />
 </p>
 
 **AntiWorldFly disables flying and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
