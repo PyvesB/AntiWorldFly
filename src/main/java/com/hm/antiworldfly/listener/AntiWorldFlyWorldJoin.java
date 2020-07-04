@@ -18,12 +18,13 @@ import com.hm.antiworldfly.AntiWorldFlyRunnable;
  */
 public class AntiWorldFlyWorldJoin implements Listener {
 
-	private AntiWorldFly plugin;
+	private final AntiWorldFly plugin;
 
 	public AntiWorldFlyWorldJoin(AntiWorldFly awf) {
 		this.plugin = awf;
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void worldJoin(PlayerChangedWorldEvent event) {
 		Player player = event.getPlayer();
