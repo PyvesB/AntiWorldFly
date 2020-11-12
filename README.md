@@ -4,11 +4,9 @@
 
 **AntiWorldFly disables flying and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
 
-# Contributing
+# Project status
 
-Contributions are happily accepted through **pull requests** on GitHub. Feel free to fork the project and share your code, or improve and update the available translations!
-
-You can also **star this repository** to support the open-source project!
+This project is no longer actively maintained, no further development work is planned, including critical bug or security fixes. If you want to take over the project, please contact me via mail or on Bukkit/Spigot so that we can discuss transferring the ownership of the repository and resource listings.
 
 # Useful links
 
