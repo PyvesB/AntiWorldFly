@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -29,8 +30,10 @@ import com.hm.mcshared.update.UpdateChecker;
  * 
  * AntiWorldFly is under GNU General Public License version 3.
  * 
- * Please visit the plugin's GitHub for more information : https://github.com/PyvesB/AntiWorldFly
- * 
+ * Please visit the fork's GitHub for more information : https://github.com/Sidpatchy/AntiWorldFly
+ *
+ * Original GitHub page: https://github.com/PyvesB/AntiWorldFly
+ *
  * Official plugin's server: hellominecraft.fr
  * 
  * Bukkit project page: dev.bukkit.org/bukkit-plugins/anti-world-fly
@@ -38,8 +41,9 @@ import com.hm.mcshared.update.UpdateChecker;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.3.8
+ * @version 2.3.10
  * @author DarkPyves
+ * @maintainer  Sidpatchy
  */
 
 public class AntiWorldFly extends JavaPlugin {
@@ -396,6 +400,21 @@ public class AntiWorldFly extends JavaPlugin {
 				}
 				sender.sendMessage(
 						chatHeader + lang.getString("world-removed", "World successfully removed: ") + args[1]);
+			}
+
+			// Display the world the player is in (/awf world)
+			// Temporary solution, will be replaced in v2.4
+			else if ("world".equals(action)) {
+				if (sender instanceof Player) {
+					Player p = (Player) sender;
+					String world = p.getWorld().getName();
+					sender.sendMessage(chatHeader + lang.getString("display-current-world",
+							"You are currently in 'WORLD'").replace("WORLD", world));
+				}
+				else {
+					sender.sendMessage(chatHeader + lang.getString("must-be-player",
+							"You must be a player to run this command."));
+				}
 			} else
 				sender.sendMessage(
 						chatHeader + lang.getString("misused-command", "Misused command. Please type /awf."));

@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.3.8 Finnish language file       | #
+# |       Anti World Fly 2.3.10 Finnish language file      | #
 # |                       By Rsl1122                       | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -18,11 +18,11 @@ awf-enabled: "AntiWorldFly otettu käyttöön."
 world-added: "Uusi maailma lisätty onnistuneesti: "
 world-removed: "Maailma poistettu onnistuneesti: "
 misused-command: "Väärin käytetty komento. Käytä mielummin /awf."
-command-error: "Komentoa suritettaessa tapahtui virhe." 
+command-error: "Komentoa suritettaessa tapahtui virhe."
 
 # Related to informational messages.
 fly-disabled-chat: "Lentäminen on estetty tässä maailmassa."
-fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-title: "§9AntiWorldFly"
 fly-disabled-subtitle: "Lentäminen on estetty tässä maailmassa."
 command-disabled-chat: "Komento on estetty tässä maailmassa."
 
@@ -41,7 +41,7 @@ awf-command-add-hover: "Varmista että käytit oikeaa nimeä!"
 awf-command-reload-hover: "Lataa useimmat asetukset config.yml ja lang.yml tiedostoista."
 awf-command-info-hover: "Lisätietoa pluginista ja sen mahtavasta tekijästä!"
 awf-command-remove-hover: "Maailma tulee olla listattuna /awf list:ssa."
-awf-tip: "&lHINT&r &8Voit &7&n&opitää hiirtä&r &8tai &7&n&oclick&r &8komentojen päällä!"
+awf-tip: "§lHINT§r §8Voit §7§n§opitää hiirtä§r §8tai §7§n§oclick§r §8komentojen päällä!"
 
 # Related to /awf info.
 version-command-name: "Nimi:"
@@ -57,3 +57,16 @@ version-command-enabled: "Plugin käynnistetty:"
 # |         Parameters to appear in future versions        | #
 # +--------------------------------------------------------+ #
 #============================================================#
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |      Parameters translated using Google Translate      | #
+# |                                          -sid          | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+# In English: You are currently in 'WORLD'
+display-current-world: "Olet tällä hetkellä 'WORLD'"
+
+# In English: Display the world you are standing in.
+awf-command-world: "Näytä maailma, jossa seisot."

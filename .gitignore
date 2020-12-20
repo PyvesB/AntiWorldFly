@@ -6,6 +6,12 @@
 .classpath
 .project
 
+# ItelliJ files #
+.idea
+/AntiWorldFly.iml
+/shelf/
+/workspace.xml
+
 # Target jars #
 target
 

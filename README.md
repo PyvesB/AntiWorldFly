@@ -6,7 +6,9 @@
 
 # Project status
 
-This project is no longer actively maintained, no further development work is planned, including critical bug or security fixes. If you want to take over the project, please contact me via mail or on Bukkit/Spigot so that we can discuss transferring the ownership of the repository and resource listings.
+This project is no longer offically maintained. I, Sidpatchy, have forked the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/PyvesB/AntiWorldFly/releases).
+
+Over the next couple of days I will be working on writing new and improved documentation as well as cleaning up the plugin.
 
 # Useful links
 
@@ -33,5 +35,5 @@ The following steps are for the [Eclipse](https://eclipse.org/) development envi
 * Tick the *pom.xml* box that appears in the *Projects* field and click *Finish*.
 * To compile the plugin, in the *Package Explorer* window, right click on the imported project, then *Run As* -> *Maven Install*.
 * The plugin will be generated in the *target* folder of the project.
- 
+
 Please let me know if you encounter any problems by opening an Issue, I am happy to help.
