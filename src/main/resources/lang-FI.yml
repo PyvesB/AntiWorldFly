@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.3.9 Finnish language file       | #
+# |       Anti World Fly 2.3.10 Finnish language file      | #
 # |                       By Rsl1122                       | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -57,3 +57,16 @@ version-command-enabled: "Plugin käynnistetty:"
 # |         Parameters to appear in future versions        | #
 # +--------------------------------------------------------+ #
 #============================================================#
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |      Parameters translated using Google Translate      | #
+# |                                          -sid          | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+# In English: You are currently in 'WORLD'
+display-current-world: "Olet tällä hetkellä 'WORLD'"
+
+# In English: Display the world you are standing in.
+awf-command-world: "Näytä maailma, jossa seisot."

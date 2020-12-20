@@ -1,10 +1,10 @@
 name: AntiWorldFly
 main: com.hm.antiworldfly.AntiWorldFly
 version: ${project.version}
-author: DarkPyves
+authors: [DarkPyves, Sidpatchy]
 load: POSTWORLD
 description: A plugin to disable flying and chosen commands when joining or playing in specific worlds.
-website: https://github.com/PyvesB/AntiWorldFly
+website: https://github.com/Sidpatchy/AntiWorldFly
 api-version: 1.13
 commands:
   awf:

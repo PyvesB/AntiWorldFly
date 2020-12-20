@@ -1,7 +1,8 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.3.9 English language file       | #
+# |       Anti World Fly 2.3.10 English language file      | #
 # |                      By DarkPyves                      | #
+# |                 Maintained by Sidpatchy                | #
 # +--------------------------------------------------------+ #
 #============================================================#
 
@@ -19,6 +20,7 @@ world-added: "New world successfully added: "
 world-removed: "World successfully removed: "
 misused-command: "Misused command. Please type /awf."
 command-error: "An error occurred while executing the command."
+display-current-world: "You are currently in 'WORLD'"
 
 # Related to informational messages.
 fly-disabled-chat: "Flying is disabled in this world."
@@ -42,6 +44,7 @@ awf-command-reload-hover: "Reload most settings in config.yml and lang.yml files
 awf-command-info-hover: "Some extra info about the plugin and its awesome author!"
 awf-command-remove-hover: "World must be listed in /awf list."
 awf-tip: "§lHINT§r §7You can §f§n§ohover§r §7or §f§n§oclick§r §7on the commands!"
+awf-command-world: "Display the world you are standing in."
 
 # Related to /awf info.
 version-command-name: "Name:"

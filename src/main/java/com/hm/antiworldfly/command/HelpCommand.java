@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.mcshared.particle.FancyMessageSender;
 
+import java.util.Objects;
+
 /**
  * Class in charge of displaying the plugin's help (/awf help).
  * 
@@ -66,28 +68,41 @@ public class HelpCommand {
 
 		if (sender.hasPermission("antiworldfly.use")) {
 			sendJsonClickableHoverableMessage(sender,
-					plugin.getChatHeader() + ChatColor.BLUE + "/awf add &oworld&r" + ChatColor.WHITE + " > "
+					plugin.getChatHeader() + ChatColor.BLUE + "/awf add <world>" + ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-add", "Add WORLD to blocked worlds.")
-									.replace("WORLD", "&oworld&r"),
+									.replace("WORLD", "world"),
 					"/awf add world", plugin.getPluginLang().getString("awf-command-add-hover",
 							"Make sure you specify the correct name!"));
 		}
 
 		if (sender.hasPermission("antiworldfly.use")) {
-			sendJsonClickableHoverableMessage(sender, plugin.getChatHeader() + ChatColor.BLUE + "/awf remove &oworld&r"
+			sendJsonClickableHoverableMessage(sender, plugin.getChatHeader() + ChatColor.BLUE + "/awf remove <world>"
 					+ ChatColor.WHITE + " > "
 					+ plugin.getPluginLang().getString("awf-command-remove", "Remove WORLD from blocked worlds.")
-							.replace("WORLD", "&oworld&r"),
+							.replace("WORLD", "world"),
 					"/awf remove world",
 					plugin.getPluginLang().getString("awf-command-remove-hover", "World must be listed in /awf list."));
 		}
 
-		// Empty line.
-		sender.sendMessage(ChatColor.BLUE + " ");
+		if (sender.hasPermission("antiworldfly.use")) {
+			sendJsonClickableHoverableMessage(sender, plugin.getChatHeader() + ChatColor.BLUE + "/awf world"
+							+ ChatColor.WHITE + " > "
+							+ plugin.getPluginLang().getString("awf-command-world", "Display the world you are standing in.")
+							.replace("WORLD", "world"),
+					"/awf remove world",
+					plugin.getPluginLang().getString("awf-command-remove-hover", "World must be listed in /awf list."));
+		}
 
-		// Tip message.
-		sender.sendMessage(ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', plugin.getPluginLang()
-				.getString("awf-tip", "&lHINT&r &8You can &7&n&ohover&r &8or &7&n&oclick&r &8on the commands!")));
+		// Check if the sender is a player
+		// Stops the plugin from sending the below lines to the console.
+		if (sender instanceof Player) {
+			// Empty line.
+			sender.sendMessage(ChatColor.BLUE + " ");
+
+			// Tip message.
+			sender.sendMessage(ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getPluginLang()
+					.getString("awf-tip", "&lHINT&r &8You can &7&n&ohover&r &8or &7&n&oclick&r &8on the commands!"))));
+		}
 	}
 
 	/**

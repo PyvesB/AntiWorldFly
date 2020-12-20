@@ -37,6 +37,9 @@ public class InfoCommand {
 				+ plugin.getPluginLang().getString("version-command-author", "Author:") + " " + ChatColor.WHITE
 				+ plugin.getDescription().getAuthors().get(0));
 		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
+				+ plugin.getPluginLang().getString("version-command-maintainer", "Maintainer:") + " " + ChatColor.WHITE
+				+ plugin.getDescription().getAuthors().get(1));
+		sender.sendMessage(plugin.getChatHeader() + ChatColor.BLUE
 				+ plugin.getPluginLang().getString("version-command-description", "Description:") + " "
 				+ ChatColor.WHITE + plugin.getPluginLang().getString("version-command-description-details",
 						"A plugin to disable flying and chosen commands when joining or playing in specific worlds."));

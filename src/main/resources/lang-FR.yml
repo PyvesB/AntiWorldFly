@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.3.9 French language file        | #
+# |       Anti World Fly 2.3.10 French language file       | #
 # |                      By DarkPyves                      | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -57,3 +57,16 @@ version-command-enabled: 'Plugin activé: '
 # |         Parameters to appear in future versions        | #
 # +--------------------------------------------------------+ #
 #============================================================#
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |      Parameters translated using Google Translate      | #
+# |                                          -sid          | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+# In English: You are currently in 'WORLD'
+display-current-world: "Vous êtes actuellement en 'WORLD'"
+
+# In English: Display the world you are standing in.
+awf-command-world: "Affichez le monde dans lequel vous vous trouvez."
