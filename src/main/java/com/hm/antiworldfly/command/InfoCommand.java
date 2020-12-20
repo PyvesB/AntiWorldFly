@@ -9,6 +9,7 @@ import com.hm.antiworldfly.AntiWorldFly;
  * Class in charge of displaying the plugin's extra information (/awf info).
  * 
  * @author Pyves
+ * @maintainer Sidpatchy
  */
 public class InfoCommand {
 

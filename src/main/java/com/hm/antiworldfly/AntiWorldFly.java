@@ -30,9 +30,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * 
  * AntiWorldFly is under GNU General Public License version 3.
  * 
- * Please visit the fork's GitHub for more information : https://github.com/Sidpatchy/AntiWorldFly
- *
- * Original GitHub page: https://github.com/PyvesB/AntiWorldFly
+ * Please visit the plugin's GitHub for more information : https://github.com/PyvesB/AntiWorldFly
  *
  * Official plugin's server: hellominecraft.fr
  * 
@@ -308,6 +306,17 @@ public class AntiWorldFly extends JavaPlugin {
 
 		if (!lang.getKeys(false).contains("command-error")) {
 			lang.set("command-error", "An error occurred while executing the command.");
+			updateDone = true;
+		}
+
+		// Added in v2.3.10
+		if (!lang.getKeys(false).contains("display-current-world")) {
+			lang.set("display-current-world", "You are currently in 'WORLD'");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("awf-command-world")) {
+			lang.set("awf-command-world", "Display the world you are standing in.");
 			updateDone = true;
 		}
 

@@ -13,6 +13,7 @@ import java.util.Objects;
  * Class in charge of displaying the plugin's help (/awf help).
  * 
  * @author Pyves
+ * @maintainer Sidpatchy
  */
 public class HelpCommand {
 

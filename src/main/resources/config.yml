@@ -18,7 +18,8 @@
 # Worlds in which flying is blocked; list below with - in front of each world name.
 antiFlyWorlds: 
   - your_world_1
-  - your_world_2
+#  - world_nether
+#  - world_end
   
 # Additional blocked commands in the above worlds; list below with - in front of each command.
 otherBlockedCommands: []
