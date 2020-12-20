@@ -6,7 +6,9 @@
 
 # Project status
 
-This project is no longer offically maintained. I, Sidpatchy, have forked the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/Sidpatchy/AntiWorldFly/releases)
+This project is no longer offically maintained. I, Sidpatchy, have forked the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/Sidpatchy/AntiWorldFly/releases).
+
+Over the next couple of days I will be working on writing new and improved documentation as well as cleaning up the plugin.
 
 # Useful links
 
