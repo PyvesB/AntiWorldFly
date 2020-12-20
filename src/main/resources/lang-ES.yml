@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |      Archivo de lenguaje para Anti World Fly 2.3.8     | #
+# |      Archivo de lenguaje para Anti World Fly 2.3.9     | #
 # |                      Por NekoShouta                    | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -16,11 +16,11 @@ awf-enabled: "AntiWorldFly activado."
 world-added: "Mundo agregado: "
 world-removed: "Mundo eliminado: "
 misused-command: "Comando desconocido. Prueba a usar /awf."
-command-error: "Ha ocurrido un error interno al ejecutar este comando." 
+command-error: "Ha ocurrido un error interno al ejecutar este comando."
 
 # Related to informational messages.
 fly-disabled-chat: "No se permite volar en este mundo."
-fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-title: "§9AntiWorldFly"
 fly-disabled-subtitle: "No se permite volar en este mundo."
 command-disabled-chat: "Este comando ha sido deshabilitado."
 
@@ -39,7 +39,7 @@ awf-command-add-hover: "Has especificado el nombre correcto?"
 awf-command-reload-hover: "Recargar el plugin (config.yml y lang.yml)."
 awf-command-info-hover: "Información extra sobre el plugin!"
 awf-command-remove-hover: "El mundo tiene que estar en /awf list."
-awf-tip: "&lTIP&r &7Puedes &f&n&oseleccionar&r &7o &f&n&ohacer click&r &7en los comandos!"
+awf-tip: "§lTIP§r §7Puedes §f§n§oseleccionar§r §7o §f§n§ohacer click§r §7en los comandos!"
 
 # Related to /awf info.
 version-command-name: "Nombre:"

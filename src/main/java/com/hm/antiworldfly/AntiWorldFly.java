@@ -40,6 +40,10 @@ import com.hm.mcshared.update.UpdateChecker;
  * @since March 2015.
  * @version 2.3.8
  * @author DarkPyves
+ * Fork maintained by Sidpatchy
+ *
+ * Fork GitHub page: https://github.com/Sidpatchy/AntiWorldFly
+ *
  */
 
 public class AntiWorldFly extends JavaPlugin {

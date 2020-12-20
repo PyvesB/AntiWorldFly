@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.3.8 French language file        | #
+# |       Anti World Fly 2.3.9 French language file        | #
 # |                      By DarkPyves                      | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -22,12 +22,12 @@ command-error: Erreur lors de l'éxecution de la commande.
 
 # Related to informational messages.
 fly-disabled-chat: Il est interdit de voler dans ce monde.
-fly-disabled-title: "&9AntiWorldFly"
+fly-disabled-title: "§9AntiWorldFly"
 fly-disabled-subtitle: Il est interdit de voler dans ce monde.
 command-disabled-chat: Commande interdite dans ce monde.
 
 # Related to /awf help.
-awf-command-disable: Désactiver AWF jusqu'au prochain &7redémarrage.
+awf-command-disable: Désactiver AWF jusqu'au prochain §7redémarrage.
 awf-command-enable: Activer AWF (si précédemment désactivé).
 awf-command-list: Lister les mondes avec AWF.
 awf-command-add: Ajouter WORLD aux mondes bloqués.
@@ -41,7 +41,7 @@ awf-command-add-hover: Assurez-vous d'avoir spécifié le bon nom !
 awf-command-reload-hover: Recharger la plupart des paramètres dans config.yml et lang.yml.
 awf-command-info-hover: Des infos supplémentaires sur le plugin !
 awf-command-remove-hover: Réactiver le vol et les commandes dans ce monde.
-awf-tip: '&lASTUCE&r &7&n&oCliquez&r &8ou &7&n&opassez votre curseur&r &8sur les commandes !'
+awf-tip: '§lASTUCE§r §7§n§oCliquez§r §8ou §7§n§opassez votre curseur§r §8sur les commandes !'
 
 # Related to /awf info.
 version-command-name: 'Nom :'
