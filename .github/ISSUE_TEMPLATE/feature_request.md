@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
+about: Suggest a new feature for this plugin
 title: ''
 labels: enhancement
 assignees: Sidpatchy
