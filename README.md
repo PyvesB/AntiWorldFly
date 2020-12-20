@@ -12,7 +12,7 @@ Over the next couple of days I will be working on writing new and improved docum
 
 # Useful links
 
-The **Wiki** of Anti World Fly is available by clicking on the *Wiki* tab at the top of the page, or directly on [this link](https://github.com/PyvesB/AntiWorldFly/wiki). Valuable information on how to set the plugin up or use it properly is at your disposal!
+The **Wiki** of Anti World Fly is available by clicking on the *Wiki* tab at the top of the page, or directly on [this link](https://github.com/Sidpatchy/AntiWorldFly/wiki). Valuable information on how to set the plugin up or use it properly is at your disposal!
 
 For more *information and download links*, please visit the project's webpages:
 
