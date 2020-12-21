@@ -6,7 +6,7 @@
 
 # Project status
 
-This project is no longer offically maintained. I, Sidpatchy, have forked the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/PyvesB/AntiWorldFly/releases).
+This project is no longer maintained by its original author. I, Sidpatchy, have taken over development of the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/PyvesB/AntiWorldFly/releases), as well as on Bukkit and Spigot.
 
 Over the next couple of days I will be working on writing new and improved documentation as well as cleaning up the plugin.
 
