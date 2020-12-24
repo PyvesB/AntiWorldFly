@@ -18,7 +18,7 @@ For more *information and download links*, please visit the project's webpages:
 
 [AntiWorldFly - Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
 
-[AntiWorldFly - Spigot](https://www.spigotmc.org/resources/anti-world-fly.86941/)
+[AntiWorldFly - Spigot](https://www.spigotmc.org/resources/anti-world-fly.5357/)
 
 Feel free to visit **HelloMinecraft**, the plugin's official server (french server):
 [![HelloMinecraft](http://img11.hostingpics.net/pics/487719servericon.png)](http://hellominecraft.fr/)

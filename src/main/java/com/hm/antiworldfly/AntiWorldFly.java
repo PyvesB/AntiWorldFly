@@ -39,7 +39,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.3.11
+ * @version 2.3.12
  * @author DarkPyves
  * @maintainer  Sidpatchy
  */
@@ -110,7 +110,7 @@ public class AntiWorldFly extends JavaPlugin {
 		// Check for available plugin update.
 		if (config.getBoolean("checkForUpdate", true)) {
 			updateChecker = new UpdateChecker(this, "https://raw.githubusercontent.com/PyvesB/AntiWorldFly/master/pom.xml",
-					"antiworldfly.use", chatHeader, "spigotmc.org/resources/anti-world-fly.86941");
+					"antiworldfly.use", chatHeader, "spigotmc.org/resources/anti-world-fly.5357");
 			pm.registerEvents(updateChecker, this);
 			updateChecker.launchUpdateCheckerTask();
 		}
