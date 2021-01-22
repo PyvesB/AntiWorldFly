@@ -1,6 +1,7 @@
 package com.hm.antiworldfly.listener;
 
 import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,18 +14,19 @@ import com.hm.antiworldfly.AntiWorldFlyRunnable;
  * Class to block some commands specified by the user in the config.
  * 
  * @author Pyves
+ * @maintainer Sidpatchy
  */
-public class AntiWorldFlyPreProcess implements Listener {
+public class CommandPreProcess implements Listener {
 
 	private AntiWorldFly plugin;
 
-	public AntiWorldFlyPreProcess(AntiWorldFly awf) {
+	public CommandPreProcess(AntiWorldFly awf) {
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly")) {
+		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly." + event.getPlayer().getWorld().getName())) {
 			return;
 		}
 

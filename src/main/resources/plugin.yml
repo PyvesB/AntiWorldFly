@@ -8,20 +8,36 @@ website: https://github.com/PyvesB/AntiWorldFly
 api-version: 1.13
 commands:
   awf:
-    description: Main AntiWorldFly command, use it to list sub-commands. 
-    aliases: [antiworldfly]  
+    description: Main AntiWorldFly command, use it to list sub-commands.
+    aliases: [antiworldfly]
     usage: /<command>
 permissions:
   antiworldfly.use:
     description: Allows to use the enable, disable, add and remove commands.
     default: false
   antiworldfly.fly:
-    description: Allows to fly even if player is in a world blocked by the plugin.
-    default: false  
+    description: DO NOT USE! This is only here to prevent issues for users updating to v2.4
+    default: false
+    children:
+      antiworldfly.fly.*: true
+  antiworldfly.fly.*:
+    description: Allows flight even if player is in a world blocked by the plugin.
+    default: false
+  antiworldfly.fly.<world>:
+    description: Allows the player to fly in a specified blocked world.
+    default: false
+  antiworldfly.elytra.*:
+    description: Allows the player to use the elytra in all blocked worlds.
+    default: false
+  antiworldfly.elytra.<world>:
+    description: Allows the player to use the elytra in a specified blocked world.
+    default: false
   antiworldfly.*:
     description: Star notation of permissions, includes all of them.
     default: op
     children:
       antiworldfly.use: true
-      antiworldfly.fly: true
+      antiworldfly.fly.*: true
+      antiworldfly.elytra.*: true
+
 

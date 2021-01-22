@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hm.antiworldfly</groupId>
 	<artifactId>AntiWorldFly</artifactId>
-	<version>2.3.12</version>
+	<version>2.4.0</version>
 	<url>https://github.com/PyvesB/AntiWorldFly</url>
 	<name>AntiWorldFly</name>
 	<description>A Minecraft plugin to disable flying and chosen commands when joining or playing in specific worlds.</description>
@@ -88,7 +88,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.16.4-R0.1-SNAPSHOT</version>
+			<version>1.16.5-R0.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

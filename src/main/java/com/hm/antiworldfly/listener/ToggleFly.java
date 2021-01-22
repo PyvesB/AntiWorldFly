@@ -16,18 +16,21 @@ import com.hm.mcshared.particle.FancyMessageSender;
  * Class to disable flying if a player manages to toggle flying.
  * 
  * @author Pyves
+ * @maintainer Sidpatchy
  */
-public class AntiWorldFlyToggleFly implements Listener {
+public class ToggleFly implements Listener {
 
 	private AntiWorldFly plugin;
 
-	public AntiWorldFlyToggleFly(AntiWorldFly awf) {
+	public ToggleFly(AntiWorldFly awf) {
 		this.plugin = awf;
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocessEvent(PlayerToggleFlightEvent event) {
-		if (plugin.isDisabled() || event.getPlayer().hasPermission("antiworldfly.fly")) {
+		Player player = event.getPlayer();
+
+		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly." + player.getWorld().getName())) {
 			return;
 		}
 
@@ -35,8 +38,6 @@ public class AntiWorldFlyToggleFly implements Listener {
 				|| "SPECTATOR".equals(event.getPlayer().getGameMode().toString())) {
 			return;
 		}
-
-		Player player = event.getPlayer();
 
 		for (String world : plugin.getAntiFlyWorlds()) {
 			if (event.getPlayer().getWorld().getName().equalsIgnoreCase(world)) {

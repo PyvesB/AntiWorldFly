@@ -20,7 +20,7 @@ public class AntiWorldFlyRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly")) {
+		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly") || player.hasPermission("antiworldfly.fly." + player.getWorld().getName())) {
 			return;
 		}
 

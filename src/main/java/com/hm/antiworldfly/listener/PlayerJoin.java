@@ -1,54 +1,42 @@
 package com.hm.antiworldfly.listener;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.antiworldfly.AntiWorldFlyRunnable;
 
 /**
- * Class to disable flying when a player changes worlds.
+ * Class to disable flying when a player joins the server.
  * 
  * @author Pyves
  */
-public class AntiWorldFlyWorldJoin implements Listener {
+public class PlayerJoin implements Listener {
 
 	private final AntiWorldFly plugin;
 
-	public AntiWorldFlyWorldJoin(AntiWorldFly awf) {
+	public PlayerJoin(AntiWorldFly awf) {
 		this.plugin = awf;
 	}
 
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void worldJoin(PlayerChangedWorldEvent event) {
+	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		if (plugin.isDisabled() || player.hasPermission("antiworldfly.fly")) {
-			return;
-		}
-
-		if (!this.plugin.isAntiFlyCreative() && player.getGameMode() == GameMode.CREATIVE
-				|| "SPECTATOR".equals(player.getGameMode().toString())) {
-			return;
-		}
-
 		for (String world : plugin.getAntiFlyWorlds()) {
 			if (player.getWorld().getName().equalsIgnoreCase(world)) {
 				// Schedule runnable to disable flying.
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(
-						Bukkit.getPluginManager().getPlugin("AntiWorldFly"),
+				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin,
 						new AntiWorldFlyRunnable(player, plugin), 20);
 				return;
 			}
 		}
 
 		if (plugin.isToggleFlyingInNonBlockedWorlds() && !player.getAllowFlight()
-				&& (player.hasPermission("antiworldfly.fly") || player.hasPermission("essentials.fly"))) {
+				&& (player.hasPermission("antiworldfly.fly." + player.getWorld().getName()) || player.hasPermission("essentials.fly"))) {
 			// Enable flying.
 			player.setAllowFlight(true);
 			if (!player.isOnGround()) {
@@ -56,4 +44,5 @@ public class AntiWorldFlyWorldJoin implements Listener {
 			}
 		}
 	}
+
 }

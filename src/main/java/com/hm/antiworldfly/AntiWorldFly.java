@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.hm.antiworldfly.listener.*;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -18,10 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.hm.antiworldfly.command.HelpCommand;
 import com.hm.antiworldfly.command.InfoCommand;
-import com.hm.antiworldfly.listener.AntiWorldFlyPlayerJoin;
-import com.hm.antiworldfly.listener.AntiWorldFlyPreProcess;
-import com.hm.antiworldfly.listener.AntiWorldFlyToggleFly;
-import com.hm.antiworldfly.listener.AntiWorldFlyWorldJoin;
 import com.hm.mcshared.file.CommentedYamlConfiguration;
 import com.hm.mcshared.update.UpdateChecker;
 
@@ -39,7 +35,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.3.12
+ * @version 2.4.0
  * @author DarkPyves
  * @maintainer  Sidpatchy
  */
@@ -57,16 +53,18 @@ public class AntiWorldFly extends JavaPlugin {
 	private boolean notifyNotFlying;
 	private boolean toggleFlyingInNonBlockedWorlds;
 	private boolean successfulLoad;
+	private boolean elytraDisabled;
 
 	// Fields related to file handling.
 	private CommentedYamlConfiguration config;
 	private CommentedYamlConfiguration lang;
 
 	// Plugin listeners.
-	private AntiWorldFlyPreProcess awfPreProcess;
-	private AntiWorldFlyWorldJoin awfWorldJoin;
-	private AntiWorldFlyPlayerJoin awfPlayerJoin;
-	private AntiWorldFlyToggleFly awfPlayerToggleFly;
+	private CommandPreProcess awfPreProcess;
+	private WorldJoin awfWorldJoin;
+	private PlayerJoin awfPlayerJoin;
+	private ToggleFly awfPlayerToggleFly;
+	private ToggleGlide awfToggleGlide;
 
 	// Used to check for plugin updates.
 	private UpdateChecker updateChecker;
@@ -93,10 +91,11 @@ public class AntiWorldFly extends JavaPlugin {
 
 		this.getLogger().info("Registering listeners...");
 
-		awfPreProcess = new AntiWorldFlyPreProcess(this);
-		awfWorldJoin = new AntiWorldFlyWorldJoin(this);
-		awfPlayerJoin = new AntiWorldFlyPlayerJoin(this);
-		awfPlayerToggleFly = new AntiWorldFlyToggleFly(this);
+		awfPreProcess = new CommandPreProcess(this);
+		awfWorldJoin = new WorldJoin(this);
+		awfPlayerJoin = new PlayerJoin(this);
+		awfPlayerToggleFly = new ToggleFly(this);
+		awfToggleGlide = new ToggleGlide(this);
 
 		PluginManager pm = getServer().getPluginManager();
 
@@ -104,6 +103,7 @@ public class AntiWorldFly extends JavaPlugin {
 		pm.registerEvents(awfWorldJoin, this);
 		pm.registerEvents(awfPlayerJoin, this);
 		pm.registerEvents(awfPlayerToggleFly, this);
+		pm.registerEvents(awfToggleGlide, this); // Throws an error on versions <1.9, plugin behaves as expected.
 
 		extractParametersFromConfig(true);
 
@@ -195,7 +195,8 @@ public class AntiWorldFly extends JavaPlugin {
 		toggleFlyingInNonBlockedWorlds = config.getBoolean("toggleFlyingInNonBlockedWorlds", false);
 		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
-		chatHeader = icon.isEmpty() ? ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE : "";
+		chatHeader = icon.isEmpty() ? "" : (ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE);
+		elytraDisabled = config.getBoolean("elytraDisabled", false);
 
 		// Unregister events if user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
@@ -232,9 +233,8 @@ public class AntiWorldFly extends JavaPlugin {
 
 		// Added in version 2.3:
 		if (!config.getKeys(false).contains("toggleFlyingInNonBlockedWorlds")) {
-			config.set("toggleFlyingInNonBlockedWorlds", false, new String[] {
-					"A player entering a world not listed in antiFlyWorlds will have flying enabled and automatically start flying if not on the ground.",
-					"Player must have either antiworldfly.fly or essentials.fly permissions for this feature to be effective." });
+			config.set("toggleFlyingInNonBlockedWorlds", false, "A player entering a world not listed in antiFlyWorlds will have flying enabled and automatically start flying if not on the ground.",
+					"Player must have either antiworldfly.fly or essentials.fly permissions for this feature to be effective.");
 			updateDone = true;
 		}
 
@@ -243,11 +243,19 @@ public class AntiWorldFly extends JavaPlugin {
 			updateDone = true;
 		}
 
+		// Added in version 2.4:
+		if (!config.getKeys(false).contains("elytraDisabled")) {
+			config.set("elytraDisabled", false,
+					"Toggles whether the elytra should be disabled in blocked worlds.");
+			updateDone = true;
+		}
+
 		if (updateDone) {
 			// Changes in the configuration: save and do a fresh load.
 			try {
 				config.saveConfiguration();
 				config.loadConfiguration();
+				this.getLogger().log(Level.INFO, "Config file updated successfully!");
 			} catch (IOException | InvalidConfigurationException e) {
 				this.getLogger().log(Level.SEVERE, "Error while saving changes to the configuration file: ", e);
 				successfulLoad = false;
@@ -300,7 +308,7 @@ public class AntiWorldFly extends JavaPlugin {
 		}
 
 		if (!lang.getKeys(false).contains("awf-tip")) {
-			lang.set("awf-tip", "&lHINT&r &7You can &f&n&ohover&r &7or &f&n&oclick&r &7on the commands!");
+			lang.set("awf-tip", "§lHINT§r §7You can §f§n§ohover§r §7or §f§n§oclick§r §7on the commands!");
 			updateDone = true;
 		}
 
@@ -317,6 +325,9 @@ public class AntiWorldFly extends JavaPlugin {
 
 		if (!lang.getKeys(false).contains("awf-command-world")) {
 			lang.set("awf-command-world", "Display the world you are standing in.");
+			this.getLogger().log(Level.WARNING, "If you are updating from an old version to v2.4.0 and up, changes have been made to permissions!" +
+					"Even though backwards compatibility is being kept for now, I recommend you update your permissions." +
+					"See: https://github.com/PyvesB/AntiWorldFly/wiki/Permissions");
 			updateDone = true;
 		}
 
@@ -325,6 +336,7 @@ public class AntiWorldFly extends JavaPlugin {
 			try {
 				lang.saveConfiguration();
 				lang.loadConfiguration();
+				this.getLogger().log(Level.INFO, "Lang file updated successfully!");
 			} catch (IOException | InvalidConfigurationException e) {
 				this.getLogger().log(Level.SEVERE, "Error while saving changes to the language file: ", e);
 				successfulLoad = false;
@@ -410,9 +422,8 @@ public class AntiWorldFly extends JavaPlugin {
 				sender.sendMessage(
 						chatHeader + lang.getString("world-removed", "World successfully removed: ") + args[1]);
 			}
-
 			// Display the world the player is in (/awf world)
-			// Temporary solution, will be replaced in v2.4
+			// Temporary solution, will probably be replaced in the future.
 			else if ("world".equals(action)) {
 				if (sender instanceof Player) {
 					Player p = (Player) sender;
@@ -481,4 +492,6 @@ public class AntiWorldFly extends JavaPlugin {
 	public void setSuccessfulLoad(boolean successfulLoad) {
 		this.successfulLoad = successfulLoad;
 	}
+
+	public boolean isElytraDisabled() { return elytraDisabled; }
 }

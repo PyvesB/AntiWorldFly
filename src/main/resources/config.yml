@@ -1,10 +1,11 @@
 #==============================O==============================#
 # I---------------------------------------------------------I #
-# |       Anti World Fly 2.3.12 configuration - Readme       | #
+# |       Anti World Fly 2.4.0 configuration - Readme       | #
 # 1---------------------------------------------------------1 #
 #==============================o==============================#
 
 # Blocked commands only operate in the worlds in which flying is blocked.
+# Elytras are only blocked in the worlds in which flight is blocked.
 # Only spaces, no tabs. To check your file, use: yaml-online-parser.appspot.com
 # Default config.yml file: github.com/PyvesB/AntiWorldFly/blob/master/src/main/resources/config.yml
 # Visit the GitHub for some additional documentation: github.com/PyvesB/AntiWorldFly
@@ -25,7 +26,11 @@ antiFlyWorlds:
 otherBlockedCommands: []
 #  - /yourCommand_1
 #  - /yourCommand_2
-  
+
+# Toggles whether the elytra should be disabled in blocked worlds.
+# Only works in versions >1.9 (obviously)
+elytraDisabled: false
+
 # Enable or disable chat messages when joining a world.
 chatMessage: true
 
