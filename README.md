@@ -2,7 +2,7 @@
 <img src ="https://github.com/PyvesB/AntiWorldFly/blob/master/images/banner.png?raw=true" />
 </p>
 
-**AntiWorldFly disables flying and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
+**AntiWorldFly disables flying, elytras, and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
 
 # Project status
 
