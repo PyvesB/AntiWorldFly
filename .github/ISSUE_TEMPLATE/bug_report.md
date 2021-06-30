@@ -13,6 +13,8 @@ Plugin Version:
 
 Minecraft Version:
 
+Spigot/CraftBukkit version: <!-- Run /version and paste the output here -->
+
 ## Expected Behavior
 <!--- Tell us what should happen -->
 
