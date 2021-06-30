@@ -119,7 +119,7 @@ public class HelpCommand {
 		// Send clickable and hoverable message if sender is a player and if no exception is caught.
 		if (sender instanceof Player) {
 			try {
-				FancyMessageSender.sendHoverableCommandMessage((Player) sender, message, command, hover, "blue");
+				FancyMessageSender.sendHoverableCommandMessage((Player) sender, message, command, hover);
 			} catch (Exception ex) {
 				plugin.getLogger().severe(
 						"Errors while trying to display clickable and hoverable message in /awf help command. Displaying standard message instead.");
