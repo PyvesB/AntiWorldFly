@@ -35,7 +35,7 @@ import com.hm.mcshared.update.UpdateChecker;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  * 
  * @since March 2015.
- * @version 2.4.0
+ * @version 2.4.1
  * @author DarkPyves
  * @maintainer  Sidpatchy
  */
