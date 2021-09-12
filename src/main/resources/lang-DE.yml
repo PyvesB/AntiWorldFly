@@ -1,0 +1,61 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Anti World Fly 2.4.1 German language file        | #
+# |                    By HerrMelodious                    | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "Du hast keine Berechtigung das zu tun."
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Konfiguration erfolgreich neu geladen."
+configuration-reload-failed: "Reload fehlgeschlagen. Für mehr Details ins Log schauen."
+
+# Related to other plugin commands.
+words-blocked: "Welten in denen Fliegen blockiert ist:"
+awf-disabled: "AntiWorldFly ist bis zum nächsten Reload oder /awf enable deaktiviert."
+awf-enabled: "AntiWorldFly aktiviert."
+world-added: "Welt hinzugefügt: "
+world-removed: "Welt entfernt: "
+misused-command: "Command falsch benutzt. Bitte /awf benutzen."
+command-error: "Beim Ausführen des Fehlers ist ein Fehler aufgetreten."
+display-current-world: "Du bist aktuell hier: 'WORLD'"
+
+# Related to informational messages.
+fly-disabled-chat: "Fliegen ist in dieser Welt deaktiviert."
+fly-disabled-title: "§9Kein Fliegen"
+fly-disabled-subtitle: "Fliegen ist in dieser Welt deaktiviert."
+command-disabled-chat: "Befehl ist in dieser Welt deaktiviert."
+
+# Related to /awf help.
+awf-command-disable: "Plugin bis zum nächsten Reload deaktivieren."
+awf-command-enable: "Plugin aktivieren (wenn zuvor deaktiviert)."
+awf-command-list: "Welten auflisten in denen Fliegen geblockt wird."
+awf-command-add: "WORLD zur Blockierliste hinzufügen."
+awf-command-reload: "Konfiguration des Plugins neu laden."
+awf-command-info: "Verschiedene Informationen über das Plugin anzeigen."
+awf-command-remove: "WORLD von Blockierliste entfernen."
+awf-command-disable-hover: "Plugin wird bis zum nächsten Reload oder /awf enable nicht funktionieren."
+awf-command-enable-hover: "Plugin ist standardmäßig aktiv. Nach vorheriger Deaktivierung benutzen."
+awf-command-list-hover: "Fliegen und einige Befehle werden in diesen Welten blockiert."
+awf-command-add-hover: "Bitte darauf achten den korrekten Namen zu spezifizieren."
+awf-command-reload-hover: "Die meisten Einstellungen der config.yml und lang.yml Dateien werden neu geladen."
+awf-command-info-hover: "Ein paar weitere Informationen zum Plugin und seinem unglaublichen Autor!"
+awf-command-remove-hover: "Welt muss in /awf list aufgeführt sein."
+awf-tip: "§lHINWEIS§r §7Du kannst über die Befehle §f§n§ohovern§r §7oder auf sie §f§n§oklicken§r §7!"
+awf-command-world: "Aktuelle Welt anzeigen."
+
+# Related to /awf info.
+version-command-name: "Name:"
+version-command-version: "Version:"
+version-command-website: "Webseite:"
+version-command-author: "Autor:"
+version-command-description: "Beschreibung:"
+version-command-description-details: "Ein Plugin um Fliegen und ausgewählte Befehle in bestimmten Welten zu deaktivieren."
+version-command-enabled: "Plugin aktiviert:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
