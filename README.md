@@ -4,11 +4,12 @@
 
 **AntiWorldFly disables flying, elytras, and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
 
+[![Build Status](https://ci.sidpatchy.com/buildStatus/icon?job=AntiWorldFly&style=flat-square)](https://ci.sidpatchy.com/job/AntiWorldFly/)
+[![License](https://img.shields.io/github/license/PyvesB/AntiWorldFly?style=flat-square)](https://github.com/PyvesB/AntiWorldFly/blob/master/LICENSE)
+
 # Project status
 
-This project is no longer maintained by its original author. I, Sidpatchy, have taken over development of the plugin and intend to continue development in the future. New builds can be found in the [releases section of this repository](https://github.com/PyvesB/AntiWorldFly/releases), as well as on Bukkit and Spigot.
-
-Over the next couple of days I will be working on writing new and improved documentation as well as cleaning up the plugin.
+This project is no longer maintained by its original author. I, Sidpatchy, have taken over development of the plugin and intend to continue development in the future. The most up-to-date builds can be found in on my [Jenkins](https://ci.sidpatchy.com/job/AntiWorldFly/), and release versions on GitHub, Bukkit and Spigot.
 
 # Useful links
 
@@ -19,6 +20,8 @@ For more *information and download links*, please visit the project's webpages:
 [AntiWorldFly - Spigot](https://www.spigotmc.org/resources/anti-world-fly.5357/)
 
 [AntiWorldFly - Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
+
+[AntiWorldFly - Jenkins](https://ci.sidpatchy.com/job/AntiWorldFly/)
 
 Feel free to visit **HelloMinecraft**, the plugin's official server (french server):
 [![HelloMinecraft](http://img11.hostingpics.net/pics/487719servericon.png)](http://hellominecraft.fr/)
