@@ -1,7 +1,14 @@
-package com.hm.antiworldfly.listener;
+package com.hm.antiworldfly.worldguard.listener;
 
 import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.mcshared.particle.FancyMessageSender;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -17,11 +24,11 @@ import java.util.logging.Level;
  *
  * @author Sidpatchy
  */
-public class ToggleGlide implements Listener {
+public class RegionToggleGlide implements Listener {
 
     private final AntiWorldFly plugin;
 
-    public ToggleGlide(AntiWorldFly awf) {
+    public RegionToggleGlide(AntiWorldFly awf) {
         this.plugin = awf;
     }
 
@@ -37,23 +44,14 @@ public class ToggleGlide implements Listener {
             return;
         }
 
-        for (String world : plugin.getAntiFlyWorlds()) {
-            if (entity.getWorld().getName().equalsIgnoreCase(world)) {
+        StateFlag flag = (StateFlag) WorldGuard.getInstance().getFlagRegistry().get(plugin.getAntiFlyFlag());
 
-                // Disable elytra
-                event.setCancelled(true);
-
-                if (plugin.isTitleMessage()) {
-                    try {FancyMessageSender.sendTitle(player,
-                            plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
-                            plugin.getPluginLang().getString("fly-disabled-subtitle", "Flying is disabled in this world."));
-                    } catch (Exception e) {
-                        plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ",
-                                e);
-                    }
-                }
-                return;
-            }
+        RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+        ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(player.getLocation()));
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        if (set.testState(localPlayer, flag)) {
+            // Disable elytra
+            event.setCancelled(true);
         }
     }
 }

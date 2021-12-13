@@ -6,7 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.hm.antiworldfly.listener.*;
+import com.hm.antiworldfly.worldguard.flags.RegisterAntiElytraFlag;
+import com.hm.antiworldfly.worldguard.listener.PlayerMove;
+import com.hm.antiworldfly.worldguard.flags.RegisterAntiFlyFlag;
+import com.hm.antiworldfly.worldguard.listener.RegionToggleGlide;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -23,17 +28,17 @@ import com.hm.mcshared.update.UpdateChecker;
 
 /**
  * A plugin to disable flying and chosen commands when joining or playing in specific worlds.
- * 
+ *
  * AntiWorldFly is under GNU General Public License version 3.
- * 
+ *
  * Please visit the plugin's GitHub for more information : https://github.com/PyvesB/AntiWorldFly
  *
  * Official plugin's server: hellominecraft.fr
- * 
+ *
  * Bukkit project page: dev.bukkit.org/bukkit-plugins/anti-world-fly
- * 
+ *
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
- * 
+ *
  * @since March 2015.
  * @version 2.4.1
  * @author DarkPyves
@@ -49,11 +54,14 @@ public class AntiWorldFly extends JavaPlugin {
 	private boolean antiFlyCreative;
 	private String chatHeader;
 	private String icon;
+	private String AntiFlyFlag;
+	private String AntiElytraFlag;
 	private boolean titleMessage;
 	private boolean notifyNotFlying;
 	private boolean toggleFlyingInNonBlockedWorlds;
 	private boolean successfulLoad;
 	private boolean elytraDisabled;
+	private boolean bStatsEnabled;
 
 	// Fields related to file handling.
 	private CommentedYamlConfiguration config;
@@ -65,6 +73,8 @@ public class AntiWorldFly extends JavaPlugin {
 	private PlayerJoin awfPlayerJoin;
 	private ToggleFly awfPlayerToggleFly;
 	private ToggleGlide awfToggleGlide;
+	private PlayerMove awfPlayerMove;
+	private RegionToggleGlide awfRegionToggleGlide;
 
 	// Used to check for plugin updates.
 	private UpdateChecker updateChecker;
@@ -82,6 +92,25 @@ public class AntiWorldFly extends JavaPlugin {
 	}
 
 	/**
+	 * Called before the plugin is enabled
+	 */
+	@Override
+	public void onLoad() {
+		extractParametersFromConfig(true);
+
+		this.getLogger().info("Attempting to register WorldGuard flag.");
+		try {
+			RegisterAntiFlyFlag antiFlyFlag = new RegisterAntiFlyFlag(this);
+			RegisterAntiElytraFlag antiElytraFlag = new RegisterAntiElytraFlag(this);
+			antiFlyFlag.register();
+			antiElytraFlag.register();
+		}
+		catch (NoClassDefFoundError ignored) {
+			this.getLogger().info("WorldGuard not detected, continuing with a limited feature-set.");
+		}
+	}
+
+	/**
 	 * Called when server is launched or reloaded.
 	 */
 	@Override
@@ -95,7 +124,19 @@ public class AntiWorldFly extends JavaPlugin {
 		awfWorldJoin = new WorldJoin(this);
 		awfPlayerJoin = new PlayerJoin(this);
 		awfPlayerToggleFly = new ToggleFly(this);
-		awfToggleGlide = new ToggleGlide(this);
+
+		try {
+			awfToggleGlide = new ToggleGlide(this);
+		}
+		catch (NoClassDefFoundError e) {
+			this.getLogger().info("You are running and outdated version of Minecraft, enabling with a limited feature-set.");
+		}
+
+		try {
+			awfPlayerMove = new PlayerMove(this);
+			awfRegionToggleGlide = new RegionToggleGlide(this);
+		}
+		catch (NoClassDefFoundError ignored) {} // already logged in onLoad()
 
 		PluginManager pm = getServer().getPluginManager();
 
@@ -103,9 +144,12 @@ public class AntiWorldFly extends JavaPlugin {
 		pm.registerEvents(awfWorldJoin, this);
 		pm.registerEvents(awfPlayerJoin, this);
 		pm.registerEvents(awfPlayerToggleFly, this);
-		pm.registerEvents(awfToggleGlide, this); // Throws an error on versions <1.9, plugin behaves as expected.
-
-		extractParametersFromConfig(true);
+		try {
+			pm.registerEvents(awfToggleGlide, this);
+			pm.registerEvents(awfPlayerMove, this);
+			pm.registerEvents(awfRegionToggleGlide, this);
+		}
+		catch (IllegalArgumentException ignored) {} // logged elsewhere
 
 		// Check for available plugin update.
 		if (config.getBoolean("checkForUpdate", true)) {
@@ -118,6 +162,10 @@ public class AntiWorldFly extends JavaPlugin {
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
 
+		if (bStatsEnabled) {
+			bStats();
+		}
+
 		if (successfulLoad) {
 			this.getLogger().info("Plugin successfully enabled and ready to run! Took "
 					+ (System.currentTimeMillis() - startTime) + "ms.");
@@ -128,7 +176,7 @@ public class AntiWorldFly extends JavaPlugin {
 
 	/**
 	 * Extract plugin parameters from the configuration file.
-	 * 
+	 *
 	 * @param attemptUpdate
 	 */
 	private void extractParametersFromConfig(boolean attemptUpdate) {
@@ -193,10 +241,13 @@ public class AntiWorldFly extends JavaPlugin {
 		antiFlyCreative = config.getBoolean("antiFlyCreative", true);
 		notifyNotFlying = config.getBoolean("notifyNotFlying", true);
 		toggleFlyingInNonBlockedWorlds = config.getBoolean("toggleFlyingInNonBlockedWorlds", false);
+		elytraDisabled = config.getBoolean("elytraDisabled", false);
+		bStatsEnabled = config.getBoolean("enable-bStats", true);
 		otherBlockedCommands = config.getList("otherBlockedCommands");
 		icon = StringEscapeUtils.unescapeJava(config.getString("icon", "\u06DE"));
+		AntiFlyFlag = StringEscapeUtils.unescapeJava(config.getString("antiFlyFlagName", "flight-enabled"));
+		AntiElytraFlag = StringEscapeUtils.unescapeJava(config.getString("antiElytraFlagName", "elytra-enabled"));
 		chatHeader = icon.isEmpty() ? "" : (ChatColor.GRAY + "[" + ChatColor.BLUE + icon + ChatColor.GRAY + "] " + ChatColor.WHITE);
-		elytraDisabled = config.getBoolean("elytraDisabled", false);
 
 		// Unregister events if user changed the option and did a /awf reload. Do not recheck for update on /awf
 		// reload.
@@ -247,6 +298,23 @@ public class AntiWorldFly extends JavaPlugin {
 		if (!config.getKeys(false).contains("elytraDisabled")) {
 			config.set("elytraDisabled", false,
 					"Toggles whether the elytra should be disabled in blocked worlds.");
+			updateDone = true;
+		}
+
+		// Added in version 2.5:
+		if (!config.getKeys(false).contains("antiFlyFlagName")) {
+			config.set("antiFlyFlagName", "flight-enabled",
+					" In the event that AntiWorldFly is conflicting with a different plugin, you can change the WorldGuard flag's name.", " WARNING: changing this will break pre-existing rules which utilize this flag!");
+			updateDone = true;
+		}
+
+		if (!config.getKeys(false).contains("antiElytraFlagName")) {
+			config.set("antiElytraFlagName", "elytra-enabled");
+			updateDone = true;
+		}
+
+		if (!config.getKeys(false).contains("enable-bStats")) {
+			config.set("enable-bStats", true, " Whether bStats should be enabled.");
 			updateDone = true;
 		}
 
@@ -445,6 +513,12 @@ public class AntiWorldFly extends JavaPlugin {
 		return true;
 	}
 
+	@SuppressWarnings("unused")
+	public void bStats() {
+		int pluginID = 13540;
+		Metrics metrics = new Metrics(this, pluginID);
+	}
+
 	public boolean isDisabled() {
 		return disabled;
 	}
@@ -479,6 +553,14 @@ public class AntiWorldFly extends JavaPlugin {
 
 	public String getIcon() {
 		return icon;
+	}
+
+	public String getAntiFlyFlag() {
+		return AntiFlyFlag;
+	}
+
+	public String getAntiElytraFlag() {
+		return AntiElytraFlag;
 	}
 
 	public CommentedYamlConfiguration getPluginLang() {

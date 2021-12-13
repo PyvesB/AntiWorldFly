@@ -50,8 +50,16 @@ toggleFlyingInNonBlockedWorlds: false
 # Set the icon of the plugin (default: '\u06DE').
 icon: '\u06DE'
 
+# In the event that AntiWorldFly is conflicting with a different plugin, you can change the WorldGuard flags' name.
+# WARNING: changing these will break pre-existing rules which utilize these flags!
+antiFlyFlagName: flight-enabled
+antiElytraFlagName: elytra-enabled
+
 # Name of the language file.
 languageFileName: lang.yml
+
+# Whether bStats should be enabled.
+enable-bStats: true
 
 # Check for update on plugin launch and notify when an OP joins the game.
 checkForUpdate: true
