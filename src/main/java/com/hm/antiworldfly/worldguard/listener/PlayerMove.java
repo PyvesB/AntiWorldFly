@@ -1,6 +1,7 @@
 package com.hm.antiworldfly.worldguard.listener;
 
 import com.hm.antiworldfly.AntiWorldFly;
+import com.hm.mcshared.particle.FancyMessageSender;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
@@ -15,6 +16,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import java.util.logging.Level;
+
 
 /**
  * Gonna be completely honest, this is the best way I can think to do this. I was initially just gonna write
@@ -24,6 +27,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
  * without this event.
  *
  * That being said, if anyone has a better way of doing this, I'm open to any and all improvements.
+ *
+ * @author Sidpatchy
  */
 public class PlayerMove implements Listener {
 
@@ -52,11 +57,27 @@ public class PlayerMove implements Listener {
         RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
         ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(player.getLocation()));
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-        if (set.testState(localPlayer, flag)) {
+        if (!set.testState(localPlayer, flag)) {
             // Disable flying.
             player.setAllowFlight(false);
             player.getPlayer().setFlying(false);
             event.setCancelled(true);
+
+            if (plugin.isChatMessage()) {
+                player.sendMessage(plugin.getChatHeader() + plugin.getPluginLang().getString("fly-disabled-region",
+                        "Flying is disabled in this region."));
+            }
+
+            if (plugin.isTitleMessage()) {
+                try {
+                    FancyMessageSender.sendTitle(player,
+                            plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
+                            plugin.getPluginLang().getString("fly-disabled-region", "Flying is disabled in this region."));
+                } catch (Exception e) {
+                    plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ",
+                            e);
+                }
+            }
         }
     }
 }

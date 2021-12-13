@@ -399,6 +399,22 @@ public class AntiWorldFly extends JavaPlugin {
 			updateDone = true;
 		}
 
+		// Added in v2.5.0
+		if (!lang.getKeys(false).contains("fly-disabled-region")) {
+			lang.set("fly-disabled-region", "Flying is disabled in this region.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("elytra-disabled-region")) {
+			lang.set("elytra-disabled-region", "Elytras are disabled in this region.");
+			updateDone = true;
+		}
+
+		if (!lang.getKeys(false).contains("elytra-disabled-subtitle")) {
+			lang.set("elytra-disabled-subtitle", "Elytras are disabled in this world.");
+			updateDone = true;
+		}
+
 		if (updateDone) {
 			// Changes in the language file: save and do a fresh load.
 			try {

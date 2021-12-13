@@ -20,7 +20,7 @@ import org.bukkit.event.entity.EntityToggleGlideEvent;
 import java.util.logging.Level;
 
 /**
- * Class to block the player from using the Elytra in blocked worlds
+ * Class to block the player from using the Elytra in disabled regions.
  *
  * @author Sidpatchy
  */
@@ -44,14 +44,30 @@ public class RegionToggleGlide implements Listener {
             return;
         }
 
-        StateFlag flag = (StateFlag) WorldGuard.getInstance().getFlagRegistry().get(plugin.getAntiFlyFlag());
+        StateFlag flag = (StateFlag) WorldGuard.getInstance().getFlagRegistry().get(plugin.getAntiElytraFlag());
 
         RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
         ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(player.getLocation()));
         LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-        if (set.testState(localPlayer, flag)) {
+        if (!set.testState(localPlayer, flag)) {
             // Disable elytra
             event.setCancelled(true);
+
+            if (plugin.isChatMessage()) {
+                player.sendMessage(plugin.getChatHeader() + plugin.getPluginLang().getString("elytra-disabled-region",
+                        "Elytras are disabled in this region."));
+            }
+
+            if (plugin.isTitleMessage()) {
+                try {
+                    FancyMessageSender.sendTitle(player,
+                            plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
+                            plugin.getPluginLang().getString("elytra-disabled-region", "Elytras are disabled in this region."));
+                } catch (Exception e) {
+                    plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ",
+                            e);
+                }
+            }
         }
     }
 }

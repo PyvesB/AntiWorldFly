@@ -43,10 +43,15 @@ public class ToggleGlide implements Listener {
                 // Disable elytra
                 event.setCancelled(true);
 
+                if (plugin.isChatMessage()) {
+                    player.sendMessage(plugin.getChatHeader() + plugin.getPluginLang().getString("elytra-disabled-subtitle",
+                            "Elytras are disabled in this world."));
+                }
+
                 if (plugin.isTitleMessage()) {
                     try {FancyMessageSender.sendTitle(player,
                             plugin.getPluginLang().getString("fly-disabled-title", "&9AntiWorldFly"),
-                            plugin.getPluginLang().getString("fly-disabled-subtitle", "Flying is disabled in this world."));
+                            plugin.getPluginLang().getString("elytra-disabled-subtitle", "Elytras are disabled in this world."));
                     } catch (Exception e) {
                         plugin.getLogger().log(Level.SEVERE, "Errors while trying to display flying disabled title: ",
                                 e);
