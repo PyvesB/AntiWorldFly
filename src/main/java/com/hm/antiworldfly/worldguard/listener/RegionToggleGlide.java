@@ -38,8 +38,7 @@ public class RegionToggleGlide implements Listener {
         Entity entity = event.getEntity();
         Player player = (Player) entity;
 
-        if (plugin.isDisabled() || ! plugin.isElytraDisabled() ||
-                (entity.hasPermission("antiworldfly.elytra." + entity.getWorld().getName())) ||
+        if (plugin.isDisabled() ||(entity.hasPermission("antiworldfly.elytra." + entity.getWorld().getName())) ||
                 (! (plugin.isAntiFlyCreative()) && player.getGameMode() == GameMode.CREATIVE)) {
             return;
         }
