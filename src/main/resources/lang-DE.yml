@@ -1,6 +1,6 @@
 #============================================================#
 # +--------------------------------------------------------+ #
-# |       Anti World Fly 2.4.1 German language file        | #
+# |       Anti World Fly 2.5.0 German language file        | #
 # |                    By HerrMelodious                    | #
 # +--------------------------------------------------------+ #
 #============================================================#
@@ -25,7 +25,10 @@ display-current-world: "Du bist aktuell hier: 'WORLD'"
 fly-disabled-chat: "Fliegen ist in dieser Welt deaktiviert."
 fly-disabled-title: "§9Kein Fliegen"
 fly-disabled-subtitle: "Fliegen ist in dieser Welt deaktiviert."
+elytra-disabled-subtitle: "Elytras sind in dieser Welt deaktiviert."
 command-disabled-chat: "Befehl ist in dieser Welt deaktiviert."
+fly-disabled-region: "Fliegen ist in dieser Region deaktiviert."
+elytra-disabled-region: "Elytras sind in dieser Region deaktiviert."
 
 # Related to /awf help.
 awf-command-disable: "Plugin bis zum nächsten Reload deaktivieren."
@@ -51,7 +54,7 @@ version-command-version: "Version:"
 version-command-website: "Webseite:"
 version-command-author: "Autor:"
 version-command-description: "Beschreibung:"
-version-command-description-details: "Ein Plugin um Fliegen und ausgewählte Befehle in bestimmten Welten zu deaktivieren."
+version-command-description-details: "Ein Plugin, um Fliegen und ausgewählte Befehle in bestimmten Welten zu deaktivieren."
 version-command-enabled: "Plugin aktiviert:"
 
 #============================================================#
