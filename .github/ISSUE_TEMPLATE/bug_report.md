@@ -7,6 +7,8 @@ assignees: Sidpatchy
 
 ---
 
+<!--- DO NOT DELETE/IGNORE THIS TEMPLATE, DOING SO WILL RESULT IN NO SUPPORT! --->
+
 <!--- Provide a general summary of the issue in the Title above -->
 
 Plugin Version:
@@ -14,6 +16,8 @@ Plugin Version:
 Minecraft Version:
 
 Spigot/CraftBukkit version: <!-- Run /version and paste the output here -->
+
+Other Plugins you are using: <!-- ex. screenshot of /plugins -->
 
 ## Expected Behavior
 <!--- Tell us what should happen -->
@@ -37,3 +41,5 @@ Spigot/CraftBukkit version: <!-- Run /version and paste the output here -->
 
 ## Detailed Description
 <!--- Provide a detailed description of the change or addition you are proposing -->
+
+<!--- DO NOT DELETE/IGNORE THIS TEMPLATE, DOING SO WILL RESULT IN NO SUPPORT! --->
