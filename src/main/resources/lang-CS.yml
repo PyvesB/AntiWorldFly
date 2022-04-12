@@ -1,0 +1,64 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Anti World Fly 2.5.0 Czech language file         | #
+# |                      By ShadowHacker                   | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "Na toto nemáte práva."
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Konfigurace byla úspěšně obnovena."
+configuration-reload-failed: "Chyba při obnovení konfigurace. Podívejte se do logu pro více informací."
+
+# Related to other plugin commands.
+words-blocked: "Světy, ve kterých je fly zakázán:"
+awf-disabled: "AntiWorldFly vypnut do příštího reloadu či /awf enable."
+awf-enabled: "AntiWorldFly zapnut."
+world-added: "Nový svět úspěšně přidán: "
+world-removed: "Svět úspěšně odstraněn: "
+misused-command: "Nesprávný příkaz. Napište /awf."
+command-error: "Nastala chyba při vykonávání příkazu."
+display-current-world: "Aktuálně jste v 'WORLD'"
+
+# Related to informational messages.
+fly-disabled-chat: "Létání je vypnuto v tomto světě."
+fly-disabled-title: "§9AntiWorldFly"
+fly-disabled-subtitle: "Létání je vypnuto v tomto světě."
+elytra-disabled-subtitle: "Krovky jsou vypnuty v tomto světě."
+command-disabled-chat: "Příkaz je vypnut v tomto světě."
+fly-disabled-region: "Létání je vypnuto v tomto regionu."
+elytra-disabled-region: "Krovky jsou vypnuté v tomto regionu."
+
+# Related to /awf help.
+awf-command-disable: "Vypne plugin do dalšího reloadu."
+awf-command-enable: "Zapne plugin (pokud byl předtím vypnut)."
+awf-command-list: "Vypíše světy, kde AWF funguje."
+awf-command-add: "Přidá SVĚT do blokovaných světů."
+awf-command-reload: "Obnoví konfiguraci pluginu."
+awf-command-info: "Ukáže různé informace o pluginu."
+awf-command-remove: "Odstraní SVĚT z blokovaných světů."
+awf-command-disable-hover: "Plugin nebude fungovat do příštího reloadu nebo /awf enable."
+awf-command-enable-hover: "Plugin automaticky zapnut. Použijte pokud jste dali /awf disable before!"
+awf-command-list-hover: "Létání a některé příkazy jsou vypnuté v těchto světech."
+awf-command-add-hover: "Ujistěte se, že jste napsali správné jméno!"
+awf-command-reload-hover: "Obnovování většiny nastavení v config.yml a lang.yml souborech."
+awf-command-info-hover: "Některé extra info o pluginu a jeho úžasném autoru!"
+awf-command-remove-hover: "Svět musí být v seznamu v /awf list."
+awf-tip: "§lRADA§r §7Můžete §f§n§onajet§r §7či §f§n§okliknout§r §7na příkazy!"
+awf-command-world: "Ukáže svět, ve kterém stojíte."
+
+# Related to /awf info.
+version-command-name: "Jméno:"
+version-command-version: "Verze:"
+version-command-website: "Web:"
+version-command-author: "Autor:"
+version-command-description: "Popis:"
+version-command-description-details: "Plugin pro vypnutí létání a zvolených příkazů při příchodu či hraní určitých světů."
+version-command-enabled: "Plugin zapnut:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |         Parameters to appear in future versions        | #
+# +--------------------------------------------------------+ #
+#============================================================#
