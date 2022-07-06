@@ -10,6 +10,7 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -40,6 +41,14 @@ public class PlayerMove implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onPlayerCommandPreprocessEvent(PlayerMoveEvent event) {
+
+        if (event.getTo() != null) {
+            Location fromBlock = event.getFrom().getBlock().getLocation();
+            Location toBlock = event.getTo().getBlock().getLocation();
+
+            if (fromBlock.equals(toBlock))
+                return;
+        }
 
         Player player = event.getPlayer();
 
