@@ -6,9 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.hm.antiworldfly.listener.*;
-import com.hm.antiworldfly.worldguard.flags.RegisterAntiElytraFlag;
+import com.hm.antiworldfly.worldguard.FlagRegistry;
 import com.hm.antiworldfly.worldguard.listener.PlayerMove;
-import com.hm.antiworldfly.worldguard.flags.RegisterAntiFlyFlag;
 import com.hm.antiworldfly.worldguard.listener.RegionToggleGlide;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bstats.bukkit.Metrics;
@@ -100,10 +99,9 @@ public class AntiWorldFly extends JavaPlugin {
 
 		this.getLogger().info("Attempting to register WorldGuard flag.");
 		try {
-			RegisterAntiFlyFlag antiFlyFlag = new RegisterAntiFlyFlag(this);
-			RegisterAntiElytraFlag antiElytraFlag = new RegisterAntiElytraFlag(this);
-			antiFlyFlag.register();
-			antiElytraFlag.register();
+			FlagRegistry flagRegistry = new FlagRegistry(this);
+			flagRegistry.register(getAntiFlyFlag());
+			flagRegistry.register(getAntiElytraFlag());
 		}
 		catch (NoClassDefFoundError ignored) {
 			this.getLogger().info("WorldGuard not detected, continuing with a limited feature-set.");

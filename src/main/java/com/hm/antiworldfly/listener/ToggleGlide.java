@@ -4,6 +4,7 @@ import com.hm.antiworldfly.AntiWorldFly;
 import com.hm.mcshared.particle.FancyMessageSender;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,16 +30,17 @@ public class ToggleGlide implements Listener {
     public void onEntityToggleGlideEvent(EntityToggleGlideEvent event) {
 
         Entity entity = event.getEntity();
+        if (!entity.getType().equals(EntityType.PLAYER)) { return; }
         Player player = (Player) entity;
 
         if (plugin.isDisabled() || ! plugin.isElytraDisabled() ||
-                (entity.hasPermission("antiworldfly.elytra." + entity.getWorld().getName())) ||
+                (player.hasPermission("antiworldfly.elytra." + player.getWorld().getName())) ||
                 (! (plugin.isAntiFlyCreative()) && player.getGameMode() == GameMode.CREATIVE)) {
             return;
         }
 
         for (String world : plugin.getAntiFlyWorlds()) {
-            if (entity.getWorld().getName().equalsIgnoreCase(world)) {
+            if (player.getWorld().getName().equalsIgnoreCase(world)) {
 
                 // Disable elytra
                 event.setCancelled(true);

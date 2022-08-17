@@ -11,6 +11,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -36,6 +37,7 @@ public class RegionToggleGlide implements Listener {
     public void onEntityToggleGlideEvent(EntityToggleGlideEvent event) {
 
         Entity entity = event.getEntity();
+        if (!entity.getType().equals(EntityType.PLAYER)) { return; }
         Player player = (Player) entity;
 
         if (plugin.isDisabled() ||(entity.hasPermission("antiworldfly.elytra." + entity.getWorld().getName())) ||
