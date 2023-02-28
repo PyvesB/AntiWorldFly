@@ -11,6 +11,7 @@ import com.hm.antiworldfly.worldguard.listener.PlayerMove;
 import com.hm.antiworldfly.worldguard.listener.RegionToggleGlide;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -97,14 +98,17 @@ public class AntiWorldFly extends JavaPlugin {
 	public void onLoad() {
 		extractParametersFromConfig(true);
 
-		this.getLogger().info("Attempting to register WorldGuard flag.");
-		try {
-			FlagRegistry flagRegistry = new FlagRegistry(this);
-			flagRegistry.register(getAntiFlyFlag());
-			flagRegistry.register(getAntiElytraFlag());
-		}
-		catch (NoClassDefFoundError ignored) {
-			this.getLogger().info("WorldGuard not detected, continuing with a limited feature-set.");
+		if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+			this.getLogger().info("WorldGuard detected! Attempting to register region flags.");
+			try {
+				FlagRegistry flagRegistry = new FlagRegistry(this);
+				flagRegistry.register(getAntiFlyFlag());
+				flagRegistry.register(getAntiElytraFlag());
+			}
+			catch (NoClassDefFoundError ignored) {
+				this.getLogger().info("There were issues with WorldGuard... Was there a major update recently?" +
+						"Please open an issue on the GitHub: https://github.com/PyvesB/AntiWorldFly/issues");
+			}
 		}
 	}
 
@@ -134,9 +138,14 @@ public class AntiWorldFly extends JavaPlugin {
 			awfPlayerMove = new PlayerMove(this);
 			awfRegionToggleGlide = new RegionToggleGlide(this);
 		}
-		catch (NoClassDefFoundError ignored) {} // already logged in onLoad()
+		catch (NoClassDefFoundError ignored) {
+		} // already logged in onLoad()
 
 		PluginManager pm = getServer().getPluginManager();
+
+		System.out.println(awfToggleGlide);
+		System.out.println(awfPlayerMove);
+		System.out.println(awfRegionToggleGlide);
 
 		pm.registerEvents(awfPreProcess, this);
 		pm.registerEvents(awfWorldJoin, this);
@@ -144,8 +153,12 @@ public class AntiWorldFly extends JavaPlugin {
 		pm.registerEvents(awfPlayerToggleFly, this);
 		try {
 			pm.registerEvents(awfToggleGlide, this);
-			pm.registerEvents(awfPlayerMove, this);
-			pm.registerEvents(awfRegionToggleGlide, this);
+
+			// Do not register these events if WorldGuard isn't installed
+			if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+				pm.registerEvents(awfPlayerMove, this);
+				pm.registerEvents(awfRegionToggleGlide, this);
+			}
 		}
 		catch (IllegalArgumentException ignored) {} // logged elsewhere
 
