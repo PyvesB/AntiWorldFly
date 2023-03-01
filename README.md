@@ -19,6 +19,8 @@ For more *information and download links*, please visit the project's webpages:
 
 [AntiWorldFly - Spigot](https://www.spigotmc.org/resources/anti-world-fly.5357/)
 
+[AntiWorldFly - Modrinth](https://modrinth.com/plugin/antiworldfly)
+
 [AntiWorldFly - Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
 
 [AntiWorldFly - Jenkins](https://ci.sidpatchy.com/job/AntiWorldFly/)
