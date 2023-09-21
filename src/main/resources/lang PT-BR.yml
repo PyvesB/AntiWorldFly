@@ -1,0 +1,65 @@
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Anti World Fly 2.5.2 Arquivo em portugues        | #
+# |                      Por _Saynt                        | #
+# |                                                        | #
+# +--------------------------------------------------------+ #
+#============================================================#
+
+no-permissions: "Você não tem permissão para fazer isso."
+
+# Related to /awf reload.
+configuration-successfully-reloaded: "Configuração recarregada com sucesso."
+configuration-reload-failed: "Erros ao recarregar a configuração. Por favor, veja os registros para mais detalhes."
+
+# Related to other plugin commands.
+words-blocked: "Mundos em que o vôo está bloqueado:"
+awf-disabled: "AntiFly desabilitado até a próxima recarga ou /awf enabled"
+awf-enabled: "AntiFly habilitade."
+world-added: "Novo mundo adicionado com sucesso: "
+world-removed: "Mundo removido com sucesso: "
+misused-command: "Comando mal utilizado. Por favor digite /awf."
+command-error: "Ocorreu um erro ao executar o comando."
+display-current-world: "Você está atualmente em 'world'"
+
+# Related to informational messages.
+fly-disabled-chat: "Voar está desativado neste mundo."
+fly-disabled-title: "§9Anti - Fly"
+fly-disabled-subtitle: "Voar está desativado neste mundo."
+elytra-disabled-subtitle: "Elytras estão desativados neste mundo."
+command-disabled-chat: "O comando está desabilitado neste mundo."
+fly-disabled-region: "O voo está desativado nesta região."
+elytra-disabled-region: "Elytras estão desativados nesta região."
+
+# Related to /awf help.
+awf-command-disable: "Desative o plugin até a próxima recarga."
+awf-command-enable: "Habilitar plugin (se desabilitado anteriormente)."
+awf-command-list: "Liste os mundos em que a AWF opera."
+awf-command-add: "Adicione WORLD aos mundos bloqueados."
+awf-command-reload: "Recarregue a configuração do plugin."
+awf-command-info: "Exibir várias informações sobre o plugin."
+awf-command-remove: "Remover WORLD dos mundos bloqueados."
+awf-command-disable-hover: "O plugin não funcionará até a próxima recarga ou /awf enable."
+awf-command-enable-hover: "Plugin habilitado por padrão. Use isto se você digitou /awf disable antes!"
+awf-command-list-hover: "Voar e alguns comandos específicos estão desativados nesses mundos."
+awf-command-add-hover: "Certifique-se de especificar o nome correto!"
+awf-command-reload-hover: "Recarregue a maioria das configurações nos arquivos config.yml e lang.yml."
+awf-command-info-hover: "Some extra info about the plugin and its awesome author!"
+awf-command-remove-hover: "O mundo deve estar listado na lista /awf."
+awf-tip: "§lHINT§r §7You can §f§n§ohover§r §7or §f§n§oclick§r §7on the commands!"
+awf-command-world: "Mostre o mundo em que você está."
+
+# Related to /awf info.
+version-command-name: "Nome:"
+version-command-version: "Versão:"
+version-command-website: "Website:"
+version-command-author: "Ator"
+version-command-description: "Descrição:"
+version-command-description-details: "Um plugin para desabilitar comandos de vôo e escolhidos ao entrar ou jogar em mundos específicos."
+version-command-enabled: "Plug-in ativado:"
+
+#============================================================#
+# +--------------------------------------------------------+ #
+# |       Parâmetros que aparecerão em versões futuras     | #
+# +--------------------------------------------------------+ #
+#============================================================#
