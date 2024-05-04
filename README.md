@@ -4,7 +4,8 @@
 
 **AntiWorldFly disables flying, elytras, and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
 
-[![Build Status](https://ci.sidpatchy.com/buildStatus/icon?job=AntiWorldFly&style=flat-square)](https://ci.sidpatchy.com/job/AntiWorldFly/)
+[![Build Status](https://img.shields.io/teamcity/build/s/AntiWorldFly_Build?server=https%3A%2F%2Fci.sidpatchy.com&style=flat-square)
+](https://ci.sidpatchy.com/project/AntiWorldFly) 
 [![License](https://img.shields.io/github/license/PyvesB/AntiWorldFly?style=flat-square)](https://github.com/PyvesB/AntiWorldFly/blob/master/LICENSE)
 
 # Project status
@@ -23,7 +24,7 @@ For more *information and download links*, please visit the project's webpages:
 
 [AntiWorldFly - Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
 
-[AntiWorldFly - Jenkins](https://ci.sidpatchy.com/job/AntiWorldFly/)
+[AntiWorldFly - TeamCity](https://ci.sidpatchy.com/project/AntiWorldFly/)
 
 Feel free to visit **HelloMinecraft**, the plugin's official server (french server):
 [![HelloMinecraft](http://img11.hostingpics.net/pics/487719servericon.png)](http://hellominecraft.fr/)
