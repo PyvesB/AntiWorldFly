@@ -90,7 +90,7 @@ public class HelpCommand {
 							+ ChatColor.WHITE + " > "
 							+ plugin.getPluginLang().getString("awf-command-world", "Display the world you are standing in.")
 							.replace("WORLD", "world"),
-					"/awf remove world",
+					"/awf world",
 					plugin.getPluginLang().getString("awf-command-remove-hover", "World must be listed in /awf list."));
 		}
 

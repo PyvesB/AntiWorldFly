@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.hm.antiworldfly.command.CommandsTab;
 import com.hm.antiworldfly.listener.*;
 import com.hm.antiworldfly.worldguard.FlagRegistry;
 import com.hm.antiworldfly.worldguard.listener.PlayerMove;
@@ -40,9 +41,8 @@ import com.hm.mcshared.update.UpdateChecker;
  * Spigot project page: spigotmc.org/resources/anti-world-fly.5357
  *
  * @since March 2015.
- * @version 2.5.0
- * @author DarkPyves
- * @maintainer  Sidpatchy
+ * @version 2.5.3
+ * @author DarkPyves, Sidpatchy
  */
 
 public class AntiWorldFly extends JavaPlugin {
@@ -143,10 +143,6 @@ public class AntiWorldFly extends JavaPlugin {
 
 		PluginManager pm = getServer().getPluginManager();
 
-		System.out.println(awfToggleGlide);
-		System.out.println(awfPlayerMove);
-		System.out.println(awfRegionToggleGlide);
-
 		pm.registerEvents(awfPreProcess, this);
 		pm.registerEvents(awfWorldJoin, this);
 		pm.registerEvents(awfPlayerJoin, this);
@@ -172,6 +168,7 @@ public class AntiWorldFly extends JavaPlugin {
 
 		helpCommand = new HelpCommand(this);
 		infoCommand = new InfoCommand(this);
+		this.getCommand("antiworldfly").setTabCompleter(new CommandsTab(this));
 
 		if (bStatsEnabled) {
 			bStats();
