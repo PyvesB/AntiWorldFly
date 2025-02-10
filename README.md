@@ -2,29 +2,22 @@
 <img src ="https://github.com/PyvesB/AntiWorldFly/blob/master/images/banner.png?raw=true" />
 </p>
 
-**AntiWorldFly disables flying, elytras, and chosen commands when joining or playing in specific worlds, on Minecraft servers running Bukkit or Spigot.**
+**AntiWorldFly disables flying, elytras, and chosen commands when joining or playing in specific worlds, on Minecraft servers running Spigot, Paper, or one of the many forks.**
 
 [![Build Status](https://img.shields.io/teamcity/build/s/AntiWorldFly_Build?server=https%3A%2F%2Fci.sidpatchy.com&style=flat-square)
 ](https://ci.sidpatchy.com/project/AntiWorldFly) 
 [![License](https://img.shields.io/github/license/PyvesB/AntiWorldFly?style=flat-square)](https://github.com/PyvesB/AntiWorldFly/blob/master/LICENSE)
-
-# Project status
-
-This project is no longer maintained by its original author. I, Sidpatchy, have taken over development of the plugin and intend to continue development in the future. The most up-to-date builds can be found in on my [Jenkins](https://ci.sidpatchy.com/job/AntiWorldFly/), and release versions on GitHub, Bukkit and Spigot.
 
 # Useful links
 
 The **Wiki** of Anti World Fly is available by clicking on the *Wiki* tab at the top of the page, or directly on [this link](https://github.com/PyvesB/AntiWorldFly/wiki). Valuable information on how to set the plugin up or use it properly is at your disposal!
 
 For more *information and download links*, please visit the project's webpages:
-
-[AntiWorldFly - Spigot](https://www.spigotmc.org/resources/anti-world-fly.5357/)
-
-[AntiWorldFly - Modrinth](https://modrinth.com/plugin/antiworldfly)
-
-[AntiWorldFly - Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
-
-[AntiWorldFly - TeamCity](https://ci.sidpatchy.com/project/AntiWorldFly/)
+- [Spigot](https://www.spigotmc.org/resources/anti-world-fly.5357/)
+- [Modrinth](https://modrinth.com/plugin/antiworldfly)
+- [PaperMC](https://hangar.papermc.io/Sidpatchy/AntiWorldFly)
+- [Bukkit](http://dev.bukkit.org/bukkit-plugins/anti-world-fly/)
+- [Development Builds](https://ci.sidpatchy.com/project/AntiWorldFly/)
 
 Feel free to visit **HelloMinecraft**, the plugin's official server (french server):
 [![HelloMinecraft](http://img11.hostingpics.net/pics/487719servericon.png)](http://hellominecraft.fr/)
@@ -42,4 +35,4 @@ The following steps are for the [Eclipse](https://eclipse.org/) development envi
 * To compile the plugin, in the *Package Explorer* window, right click on the imported project, then *Run As* -> *Maven Install*.
 * The plugin will be generated in the *target* folder of the project.
 
-Please let me know if you encounter any problems by opening an Issue, I am happy to help.
+Please let me know if you encounter any problems by [opening an Issue](https://github.com/PyvesB/AntiWorldFly/issues/new/choose), I am happy to help.
